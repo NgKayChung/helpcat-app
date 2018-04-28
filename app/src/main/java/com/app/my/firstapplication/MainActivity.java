@@ -99,43 +99,6 @@ public class MainActivity extends AppCompatActivity {
                             dialog.show();
                         }
                     });
-
-                    /*database.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            if(idExists) {
-                                Student loginStudent = dataSnapshot.getValue(Student.class);
-
-                                if(studentPassword.equals(loginStudent.getStudentPassword())) {
-                                    dTitle.setText("Successful");
-                                    desc_txt.setText(loginStudent.toString());
-                                    dialog.show();
-
-                                    dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                                        @Override
-                                        public void onDismiss(DialogInterface dialog) {
-                                            startActivity(new Intent(MainActivity.this, NavActivity.class));
-                                        }
-                                    });
-                                } else {
-                                    dTitle.setText("Error");
-                                    desc_txt.setText("Incorrect Student ID or Password");
-                                    dialog.show();
-                                }
-                            } else {
-                                dTitle.setText("Error");
-                                desc_txt.setText("Incorrect Student ID or Password");
-                                dialog.show();
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-                            dTitle.setText("Error");
-                            desc_txt.setText("Failed to read value");
-                            dialog.show();
-                        }
-                    });*/
                 }
             }
         });
