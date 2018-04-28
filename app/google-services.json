@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "347666697995",
+    "firebase_url": "https://spending-tracking-app-8caa9.firebaseio.com",
+    "project_id": "spending-tracking-app-8caa9",
+    "storage_bucket": "spending-tracking-app-8caa9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:347666697995:android:5f8b3cc0b2a70fad",
+        "android_client_info": {
+          "package_name": "com.app.my.firstapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "347666697995-5t9ovems1k9g036181n57ih0c0uhb1t9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMTgNhWQT9fkRx0w8KjeNnybN6d2B-gT4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
