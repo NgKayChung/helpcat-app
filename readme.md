@@ -1,1 +1,1 @@
-# HELP CAT app
+# HELP CAT Mobile Application for Software Project
