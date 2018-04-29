@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FirstApplication</string>
+    <string name="app_name">HELP CAT App</string>
     <string name="alert">Alert</string>
     <string name="title_activity_nav">NavActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
