@@ -3,6 +3,7 @@ package com.app.my.firstapplication;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.*;
 import android.support.v7.app.AppCompatActivity;
@@ -11,14 +12,18 @@ import android.os.Bundle;
 import com.google.firebase.database.*;
 
 public class MainActivity extends AppCompatActivity {
+    private ToggleButton studentToggBtn, lecturerToggBtn;
+    private TextView id_lbl, pass_lbl;
+    private EditText id_txt, pass_txt;
     private Button loginButton;
-    private EditText studid_txt, studPass_txt;
 
     private AlertDialog.Builder dBuilder;
     private AlertDialog dialog;
     private View dView;
     private TextView dTitle;
     private TextView desc_txt;
+
+    private boolean isStudent;
 
     private DatabaseReference database;
 
@@ -28,9 +33,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //find view components
+        studentToggBtn = (ToggleButton) findViewById(R.id.studentToggle);
+        lecturerToggBtn = (ToggleButton) findViewById(R.id.lecturerToggle);
+        id_lbl = (TextView) findViewById(R.id.idLbl);
+        pass_lbl = (TextView) findViewById(R.id.passLbl);
+        id_txt = (EditText) findViewById(R.id.idTxt);
+        pass_txt = (EditText) findViewById(R.id.passTxt);
         loginButton = (Button) findViewById(R.id.loginBtn);
-        studid_txt = (EditText) findViewById(R.id.stud_idTxt);
-        studPass_txt = (EditText) findViewById(R.id.stud_passTxt);
+
+        isStudent = true;
+        studentToggBtn.setChecked(isStudent);
 
         //initialize dialog box components
         dBuilder = new AlertDialog.Builder(MainActivity.this);
@@ -46,29 +58,29 @@ public class MainActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String studentID = studid_txt.getText().toString();
-                final String studentPassword = studPass_txt.getText().toString();
+                final String login_id = id_txt.getText().toString();
+                final String login_password = pass_txt.getText().toString();
 
-                if(studentID.equals("") && studentPassword.equals("")){
+                if(login_id.equals("") && login_password.equals("")){
                     dTitle.setText("Error");
                     desc_txt.setText("Please insert your Student ID and Password");
                     dialog.show();
-                }else if(studentID.equals("")){
+                }else if(login_id.equals("")){
                     dTitle.setText("Error");
                     desc_txt.setText("Please insert your Student ID");
                     dialog.show();
-                }else if(studentPassword.equals("")){
+                }else if(login_password.equals("")){
                     dTitle.setText("Error");
                     desc_txt.setText("Please insert your Password");
                     dialog.show();
                 }else {
-                    database.child(studentID).addValueEventListener(new ValueEventListener() {
+                    database.child(login_id).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             try {
                                 Student loginStudent = dataSnapshot.getValue(Student.class);
 
-                                if (studentPassword.equals(loginStudent.getStudentPassword())) {
+                                if (login_password.equals(loginStudent.getStudentPassword())) {
                                     dTitle.setText("Successful");
                                     desc_txt.setText(loginStudent.toString());
                                     dialog.show();
