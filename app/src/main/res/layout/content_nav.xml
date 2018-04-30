@@ -8,4 +8,23 @@
     tools:context=".NavActivity"
     tools:showIn="@layout/app_bar_nav">
 
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="173dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/sliderDots"
+        android:layout_width="match_parent"
+        android:layout_height="18dp"
+        android:layout_marginTop="155dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></LinearLayout>
 </android.support.constraint.ConstraintLayout>
