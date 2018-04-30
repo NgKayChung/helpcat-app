@@ -30,40 +30,6 @@ public class NavActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-<<<<<<< HEAD
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new MyTimerTask(), 2000, 4000);
-    }
-
-    public class MyTimerTask extends TimerTask {
-
-        @Override
-        public void run() {
-
-            NavActivity.this.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    if(viewPager.getCurrentItem() == 0){
-                        viewPager.setCurrentItem(1);
-                    } else if(viewPager.getCurrentItem() == 1){
-                        viewPager.setCurrentItem(2);
-                    } else {
-                        viewPager.setCurrentItem(0);
-                    }
-
-                }
-            });
-
-        }
-=======
->>>>>>> parent of 25fc603... added image slider in NavActivity
     }
 
     @Override
