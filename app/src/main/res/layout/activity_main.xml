@@ -25,7 +25,7 @@
         app:layout_constraintVertical_bias="0.118" />
 
     <TextView
-        android:id="@+id/stud_idLbl"
+        android:id="@+id/idLbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -41,7 +41,7 @@
         app:layout_constraintVertical_bias="0.424" />
 
     <EditText
-        android:id="@+id/stud_idTxt"
+        android:id="@+id/idTxt"
         android:layout_width="wrap_content"
         android:layout_height="46dp"
         android:layout_marginBottom="8dp"
@@ -59,7 +59,7 @@
         app:layout_constraintVertical_bias="0.498" />
 
     <TextView
-        android:id="@+id/stud_passLbl"
+        android:id="@+id/passLbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -75,7 +75,7 @@
         app:layout_constraintVertical_bias="0.628" />
 
     <EditText
-        android:id="@+id/stud_passTxt"
+        android:id="@+id/passTxt"
         android:layout_width="wrap_content"
         android:layout_height="46dp"
         android:layout_marginBottom="8dp"
@@ -117,7 +117,10 @@
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:autoLink="none"
+        android:autoText="true"
         android:background="@drawable/login_toggle_unselected"
+        android:checked="true"
         android:textOff="Student"
         android:textOn="Student"
         app:layout_constraintBottom_toBottomOf="parent"
