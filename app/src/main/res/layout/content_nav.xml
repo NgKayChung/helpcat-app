@@ -26,6 +26,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+<<<<<<< HEAD
         app:layout_constraintTop_toTopOf="parent"></LinearLayout>
 
 
@@ -90,4 +91,8 @@
         tools:ignore="MissingConstraints" />
 
 
+=======
+        app:layout_constraintTop_toTopOf="parent">
+    </LinearLayout>
+>>>>>>> a114cecdfba7148f7c610cedae9dced70ea9fa0d
 </android.support.constraint.ConstraintLayout>
