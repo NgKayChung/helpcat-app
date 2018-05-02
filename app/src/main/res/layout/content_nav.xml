@@ -26,29 +26,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-<<<<<<< HEAD
         app:layout_constraintTop_toTopOf="parent"></LinearLayout>
 
 
     <TextView
         android:id="@+id/etEvent"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="18dp"
         android:text="Event"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="69dp"
-        tools:layout_editor_absoluteY="282dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="86dp"
+        tools:layout_editor_absoluteY="305dp" />
 
     <ImageView
+        android:id="@+id/imageView2"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:background="@drawable/circlebackground"
         android:padding="10dp"
         android:src="@drawable/ic_school_black_24dp"
-        tools:layout_editor_absoluteX="218dp"
-        tools:layout_editor_absoluteY="182dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="234dp"
+        tools:layout_editor_absoluteY="206dp" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -58,17 +57,17 @@
         android:padding="10dp"
         app:srcCompat="@drawable/ic_event_note_black_24dp"
         tools:ignore="MissingConstraints,VectorDrawableCompat"
-        tools:layout_editor_absoluteX="40dp"
-        tools:layout_editor_absoluteY="182dp" />
+        tools:layout_editor_absoluteX="52dp"
+        tools:layout_editor_absoluteY="205dp" />
 
     <TextView
         android:id="@+id/etTimeTable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TimeTable"
-        tools:layout_editor_absoluteX="238dp"
-        tools:layout_editor_absoluteY="282dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="252dp"
+        tools:layout_editor_absoluteY="305dp" />
 
     <ImageView
         android:id="@+id/imageView5"
@@ -78,21 +77,16 @@
         android:padding="10dp"
         app:srcCompat="@drawable/ic_event_available_black_24dp"
         tools:ignore="MissingConstraints,VectorDrawableCompat"
-        tools:layout_editor_absoluteX="40dp"
-        tools:layout_editor_absoluteY="339dp" />
+        tools:layout_editor_absoluteX="52dp"
+        tools:layout_editor_absoluteY="343dp" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Attendance"
-        tools:layout_editor_absoluteX="52dp"
-        tools:layout_editor_absoluteY="439dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="65dp"
+        tools:layout_editor_absoluteY="443dp" />
 
-
-=======
-        app:layout_constraintTop_toTopOf="parent">
-    </LinearLayout>
->>>>>>> a114cecdfba7148f7c610cedae9dced70ea9fa0d
 </android.support.constraint.ConstraintLayout>
