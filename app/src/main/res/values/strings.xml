@@ -11,5 +11,6 @@
     <string name="studentid_text">Student ID</string>
     <string name="lecturerid_text">Lecturer ID</string>
     <string name="password_text">Password</string>
+    <string name="event_page">Upcoming Events</string>
     <string name="logout">Logout</string>
 </resources>

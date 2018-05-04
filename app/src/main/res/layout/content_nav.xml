@@ -26,38 +26,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></LinearLayout>
+        app:layout_constraintTop_toTopOf="parent">
+    </LinearLayout>
 
 
     <TextView
-        android:id="@+id/etEvent"
+        android:id="@+id/event_text"
         android:layout_width="wrap_content"
         android:layout_height="18dp"
         android:layout_marginStart="84dp"
         android:text="Event"
         android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4"
+        app:layout_constraintTop_toBottomOf="@+id/event_img"
         tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="204dp"
-        android:background="@drawable/circlebackground"
-        android:padding="10dp"
-        android:src="@drawable/ic_school_black_24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.09"
-        app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
-
-    <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/event_img"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginBottom="8dp"
@@ -72,19 +57,8 @@
         app:srcCompat="@drawable/ic_event_note_black_24dp"
         tools:ignore="MissingConstraints,VectorDrawableCompat" />
 
-    <TextView
-        android:id="@+id/etTimeTable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="136dp"
-        android:text="TimeTable"
-        android:textAlignment="center"
-        app:layout_constraintStart_toEndOf="@+id/etEvent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        tools:ignore="MissingConstraints" />
-
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/attendance_img"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginEnd="8dp"
@@ -95,12 +69,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.164"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etEvent"
+        app:layout_constraintTop_toBottomOf="@+id/event_text"
         app:srcCompat="@drawable/ic_event_available_black_24dp"
         tools:ignore="MissingConstraints,VectorDrawableCompat" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/attendance_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -109,8 +83,35 @@
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        app:layout_constraintTop_toBottomOf="@+id/attendance_img"
         app:layout_constraintVertical_bias="0.0"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/classes_img"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="204dp"
+        android:background="@drawable/circlebackground"
+        android:padding="10dp"
+        android:src="@drawable/ic_school_black_24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.09"
+        app:layout_constraintStart_toEndOf="@+id/event_img"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/timeTable_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="136dp"
+        android:text="TimeTable"
+        android:textAlignment="center"
+        app:layout_constraintStart_toEndOf="@+id/event_text"
+        app:layout_constraintTop_toBottomOf="@+id/classes_img"
         tools:ignore="MissingConstraints" />
 
 </android.support.constraint.ConstraintLayout>

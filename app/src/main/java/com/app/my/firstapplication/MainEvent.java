@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.Objects;
+
 public class MainEvent extends AppCompatActivity {
 
     ListView mListView;
@@ -53,8 +55,8 @@ public class MainEvent extends AppCompatActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
 
             View view = getLayoutInflater().inflate(R.layout.event_list_layout,null);
-            ImageView mImageView = (ImageView) view.findViewById(R.id.imageView);
-            TextView mTextView =(TextView) view.findViewById(R.id.textView);
+            ImageView mImageView = (ImageView) view.findViewById(R.id.eventImage);
+            TextView mTextView =(TextView) view.findViewById(R.id.eventText);
 
             mImageView.setImageResource(images[position]);
             mTextView.setText(TextEvent[position]);

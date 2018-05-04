@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -23,6 +24,7 @@ public class NavActivity extends AppCompatActivity
     LinearLayout sliderDotspanel;
     private int dotscount;
     private ImageView[] dots;
+    private ImageView eventImg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +96,14 @@ public class NavActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        eventImg = (ImageView) findViewById(R.id.event_img);
 
+        eventImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(NavActivity.this, MainEvent.class));
+            }
+        });
     }
 
     public class MyTimerTask extends TimerTask {
@@ -157,14 +166,10 @@ public class NavActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
+        int item_id = item.getItemId();
 
-        if (id == R.id.nav_logout) {
-
-
+        if (item_id == R.id.nav_logout)
             startActivity(new Intent(NavActivity.this, MainActivity.class));
-
-        }
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
