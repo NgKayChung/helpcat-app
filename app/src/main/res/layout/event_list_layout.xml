@@ -9,10 +9,9 @@
         android:id="@+id/Event1"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_alignParentStrat="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="16dp"
-        android:layouy_marginTop="19dp"
+        android:layout_marginTop="19dp"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <TextView
@@ -20,15 +19,12 @@
         android:layout_width="173dp"
         android:layout_height="38dp"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentStrat="18dp"
         android:layout_alignParentTop="true"
-        android:layout_marginEnd="85dp"
-        android:layout_marginTop="12dp"
-        android:layouy_marginTop="35dp"
-        android:layouy_toEndOf="@+id/Event1"
+        android:layout_marginEnd="68dp"
+        android:layout_marginTop="34dp"
         android:text="Big Data"
-        android:textStyle="bold"
-        android:textSize="30dp"/>
+        android:textSize="30dp"
+        android:textStyle="bold" />
 
 
 </RelativeLayout>

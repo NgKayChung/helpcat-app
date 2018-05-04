@@ -26,73 +26,91 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-<<<<<<< HEAD
         app:layout_constraintTop_toTopOf="parent"></LinearLayout>
 
 
     <TextView
         android:id="@+id/etEvent"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="18dp"
+        android:layout_marginStart="84dp"
         android:text="Event"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="69dp"
-        tools:layout_editor_absoluteY="282dp"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4"
         tools:ignore="MissingConstraints" />
 
     <ImageView
+        android:id="@+id/imageView2"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="204dp"
         android:background="@drawable/circlebackground"
         android:padding="10dp"
         android:src="@drawable/ic_school_black_24dp"
-        tools:layout_editor_absoluteX="218dp"
-        tools:layout_editor_absoluteY="182dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.09"
+        app:layout_constraintStart_toEndOf="@+id/imageView4"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="204dp"
         android:background="@drawable/circlebackground"
         android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/ic_event_note_black_24dp"
-        tools:ignore="MissingConstraints,VectorDrawableCompat"
-        tools:layout_editor_absoluteX="40dp"
-        tools:layout_editor_absoluteY="182dp" />
+        tools:ignore="MissingConstraints,VectorDrawableCompat" />
 
     <TextView
         android:id="@+id/etTimeTable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="136dp"
         android:text="TimeTable"
-        tools:layout_editor_absoluteX="238dp"
-        tools:layout_editor_absoluteY="282dp"
+        android:textAlignment="center"
+        app:layout_constraintStart_toEndOf="@+id/etEvent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
         tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/imageView5"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/circlebackground"
         android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.164"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etEvent"
         app:srcCompat="@drawable/ic_event_available_black_24dp"
-        tools:ignore="MissingConstraints,VectorDrawableCompat"
-        tools:layout_editor_absoluteX="40dp"
-        tools:layout_editor_absoluteY="339dp" />
+        tools:ignore="MissingConstraints,VectorDrawableCompat" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="66dp"
         android:text="Attendance"
-        tools:layout_editor_absoluteX="52dp"
-        tools:layout_editor_absoluteY="439dp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints" />
 
-
-=======
-        app:layout_constraintTop_toTopOf="parent">
-    </LinearLayout>
->>>>>>> a114cecdfba7148f7c610cedae9dced70ea9fa0d
 </android.support.constraint.ConstraintLayout>
