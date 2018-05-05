@@ -13,6 +13,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <ViewFlipper
+        android:id="@+id/picture_slider"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        />
+
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
@@ -21,20 +28,6 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_nav"
         app:menu="@menu/activity_nav_drawer" />
-
-    <ViewFlipper
-        android:id="@+id/picture_slider"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_centerHorizontal="true"
-        />
-
-
-
-
-
-
-
 
 
 </android.support.v4.widget.DrawerLayout>

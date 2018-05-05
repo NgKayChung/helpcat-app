@@ -1,18 +1,13 @@
 package com.app.my.firstapplication;
 
-import android.media.Image;
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.util.Objects;
 
 public class MainEvent extends AppCompatActivity {
 
