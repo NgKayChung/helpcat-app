@@ -8,15 +8,23 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class MainEvent extends AppCompatActivity {
 
-    ListView mListView;
-    int[] images = {R.drawable.slide1, R.drawable.slide2, R.drawable.slide3};
-    String[] TextEvent = {"Big Data", "App develop", "ARU promote"};
+
+    private ExpandableListView ExpendList;
+    private  ExpandableListAdapter adapter;
+    private  ArrayList<String> listCategoria;
+    private Map<String,ArrayList<String>> mapChild;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,44 +32,48 @@ public class MainEvent extends AppCompatActivity {
         setContentView(R.layout.activity_main_event);
 
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ExpendList =(ExpandableListView) findViewById(R.id.ExpendList);
+        listCategoria = new ArrayList<>();
+        mapChild = new HashMap<>();
+        cargarDatos();
 
-        mListView = (ListView) findViewById(R.id.EventList);
-        CustomAdaptor customAdaptor = new CustomAdaptor();
-        mListView.setAdapter(customAdaptor);
 
     }
 
-    class CustomAdaptor extends BaseAdapter {
+    private void cargarDatos()
+    {
+        ArrayList<String> listBigData = new ArrayList<>();
+        ArrayList<String> listAruPromote = new ArrayList<>();
+        ArrayList<String> listUIU = new ArrayList<>();
+        ArrayList<String> listACCA = new ArrayList<>();
 
-        @Override
-        public int getCount() {
-            return images.length;
+
+        listCategoria.add("BigData");
+        listCategoria.add("Aru");
+        listCategoria.add("UIU");
+        listCategoria.add("ACCA");
+
+        listBigData.add("Mr Hello are going to have an introduction of big data in level 4 at 12:00");
+        listAruPromote.add("Ms Vasugi");
+        listUIU.add("Dnt know");
+        listACCA.add("ACCA");
+
+        mapChild.put(listCategoria.get(0),listBigData);
+        mapChild.put(listCategoria.get(1),listAruPromote);
+        mapChild.put(listCategoria.get(2),listUIU);
+        mapChild.put(listCategoria.get(3),listACCA);
+
+        adapter = new ExpandableListAdapter(listCategoria, mapChild, this);
+
+
+        ExpendList.setAdapter(adapter);
+
+
         }
 
-        @Override
-        public Object getItem(int position) {
-            return null;
-        }
 
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
 
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
 
-            View view = getLayoutInflater().inflate(R.layout.event_list_layout,null);
-            ImageView mImageView = (ImageView) view.findViewById(R.id.imageView);
-            TextView mTextView =(TextView) view.findViewById(R.id.textView);
-
-            mImageView.setImageResource(images[position]);
-            mTextView.setText(TextEvent[position]);
-
-            return view;
-        }
-    }
 
 
 }
