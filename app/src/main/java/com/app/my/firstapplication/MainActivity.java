@@ -1,12 +1,14 @@
 package com.app.my.firstapplication;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.View;
 import android.widget.*;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -28,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseDatabase firebase;
     private DatabaseReference database;
+
+    private SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +107,8 @@ public class MainActivity extends AppCompatActivity {
 
         firebase = FirebaseDatabase.getInstance();
 
+        pref = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+
         //set login button event
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,6 +145,15 @@ public class MainActivity extends AppCompatActivity {
                                             desc_txt.setText(loginStudent.toString());
                                             dialog.show();
 
+                                            SharedPreferences.Editor editor = pref.edit();
+                                            editor.putString("KEY_ID", loginStudent.getStudentID());
+                                            editor.putString("KEY_PASSWORD", loginStudent.getStudentPassword());
+                                            editor.putString("KEY_NAME", loginStudent.getStudentName());
+                                            editor.putString("KEY_TYPE", loginType);
+                                            editor.apply();
+
+                                            Log.d("Login Student", loginStudent.getStudentID() + " , " + loginStudent.getStudentName() + " , " + loginStudent.getStudentPassword());
+
                                             dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                                                 @Override
                                                 public void onDismiss(DialogInterface dialog) {
@@ -157,6 +172,13 @@ public class MainActivity extends AppCompatActivity {
                                             dTitle.setText("Successful");
                                             desc_txt.setText(loginLecturer.toString());
                                             dialog.show();
+
+                                            SharedPreferences.Editor editor = pref.edit();
+                                            editor.putString("KEY_ID", loginLecturer.getLecturerID());
+                                            editor.putString("KEY_PASSWORD", loginLecturer.getLecturerPassword());
+                                            editor.putString("KEY_NAME", loginLecturer.getLecturerName());
+                                            editor.putString("KEY_TYPE", loginType);
+                                            editor.apply();
 
                                             dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                                                 @Override

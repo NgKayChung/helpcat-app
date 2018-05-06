@@ -1,6 +1,8 @@
 package com.app.my.firstapplication;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
@@ -11,8 +13,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -23,6 +27,7 @@ public class NavActivity extends AppCompatActivity
     LinearLayout sliderDotspanel;
     private int dotscount;
     private ImageView[] dots;
+    private ImageView eventImg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +99,14 @@ public class NavActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        eventImg = (ImageView) findViewById(R.id.event_img);
 
+        eventImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(NavActivity.this, MainEvent.class));
+            }
+        });
     }
 
     public class MyTimerTask extends TimerTask {
@@ -127,7 +139,7 @@ public class NavActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             android.os.Process.killProcess(android.os.Process.myPid());
-            System.exit(1);
+            System.exit(0);
         }
     }
 
@@ -153,19 +165,23 @@ public class NavActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }*/
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
+        // Handle logout process here
+        int item_id = item.getItemId();
+        item.setChecked(true);
+        if (item_id == R.id.nav_logout) {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            finish();
 
-        if (id == R.id.nav_logout) {
-
-
-            startActivity(new Intent(NavActivity.this, MainActivity.class));
-
+            SharedPreferences currentPrefs = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = currentPrefs.edit();
+            editor.clear();
+            editor.apply();
+            //Toast.makeText(this, "Logout successfully", Toast.LENGTH_SHORT).show();
+            startActivity(intent);
         }
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

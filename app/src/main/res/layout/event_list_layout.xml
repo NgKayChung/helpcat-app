@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/Event1"
+        android:id="@+id/eventImage"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_alignParentStart="true"
@@ -15,7 +15,7 @@
         app:srcCompat="@mipmap/ic_launcher" />
 
     <TextView
-        android:id="@+id/TextEvent"
+        android:id="@+id/eventText"
         android:layout_width="173dp"
         android:layout_height="38dp"
         android:layout_alignParentEnd="true"

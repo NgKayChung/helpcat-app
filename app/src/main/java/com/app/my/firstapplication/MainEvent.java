@@ -1,16 +1,17 @@
 package com.app.my.firstapplication;
 
-import android.media.Image;
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+<<<<<<< HEAD
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+=======
+>>>>>>> b88be1f389fe27a5bfe747082707fb5349ddf186
 import android.widget.ListView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -65,6 +66,12 @@ public class MainEvent extends AppCompatActivity {
 
         adapter = new ExpandableListAdapter(listCategoria, mapChild, this);
 
+<<<<<<< HEAD
+=======
+            View view = getLayoutInflater().inflate(R.layout.event_list_layout,null);
+            ImageView mImageView = (ImageView) view.findViewById(R.id.eventImage);
+            TextView mTextView =(TextView) view.findViewById(R.id.eventText);
+>>>>>>> b88be1f389fe27a5bfe747082707fb5349ddf186
 
         ExpendList.setAdapter(adapter);
 
