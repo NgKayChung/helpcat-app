@@ -5,11 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-<<<<<<< HEAD
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
-=======
->>>>>>> b88be1f389fe27a5bfe747082707fb5349ddf186
 import android.widget.ListView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,29 +17,23 @@ import java.util.List;
 import java.util.Map;
 
 public class MainEvent extends AppCompatActivity {
-
-
     private ExpandableListView ExpendList;
-    private  ExpandableListAdapter adapter;
-    private  ArrayList<String> listCategoria;
-    private Map<String,ArrayList<String>> mapChild;
+    private ExpandableListAdapter adapter;
+    private ArrayList<String> listCategoria;
+    private Map<String, ArrayList<String>> mapChild;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_event);
 
-
-        ExpendList =(ExpandableListView) findViewById(R.id.ExpendList);
+        ExpendList = (ExpandableListView) findViewById(R.id.ExpendList);
         listCategoria = new ArrayList<>();
         mapChild = new HashMap<>();
         cargarDatos();
-
-
     }
 
-    private void cargarDatos()
-    {
+    private void cargarDatos() {
         ArrayList<String> listBigData = new ArrayList<>();
         ArrayList<String> listAruPromote = new ArrayList<>();
         ArrayList<String> listUIU = new ArrayList<>();
@@ -59,33 +50,17 @@ public class MainEvent extends AppCompatActivity {
         listUIU.add("Dnt know");
         listACCA.add("ACCA");
 
-        mapChild.put(listCategoria.get(0),listBigData);
-        mapChild.put(listCategoria.get(1),listAruPromote);
-        mapChild.put(listCategoria.get(2),listUIU);
-        mapChild.put(listCategoria.get(3),listACCA);
+        mapChild.put(listCategoria.get(0), listBigData);
+        mapChild.put(listCategoria.get(1), listAruPromote);
+        mapChild.put(listCategoria.get(2), listUIU);
+        mapChild.put(listCategoria.get(3), listACCA);
 
         adapter = new ExpandableListAdapter(listCategoria, mapChild, this);
 
-<<<<<<< HEAD
-=======
-            View view = getLayoutInflater().inflate(R.layout.event_list_layout,null);
-            ImageView mImageView = (ImageView) view.findViewById(R.id.eventImage);
-            TextView mTextView =(TextView) view.findViewById(R.id.eventText);
->>>>>>> b88be1f389fe27a5bfe747082707fb5349ddf186
+        View view = getLayoutInflater().inflate(R.layout.event_list_layout, null);
+        ImageView mImageView = (ImageView) view.findViewById(R.id.eventImage);
+        TextView mTextView = (TextView) view.findViewById(R.id.eventText);
 
         ExpendList.setAdapter(adapter);
-
-
-        }
-
-
-
-
-
-
+    }
 }
-
-
-
-
-
