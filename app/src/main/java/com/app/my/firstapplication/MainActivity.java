@@ -147,7 +147,6 @@ public class MainActivity extends AppCompatActivity {
 
                                             SharedPreferences.Editor editor = pref.edit();
                                             editor.putString("KEY_ID", loginStudent.getStudentID());
-                                            editor.putString("KEY_PASSWORD", loginStudent.getStudentPassword());
                                             editor.putString("KEY_NAME", loginStudent.getStudentName());
                                             editor.putString("KEY_TYPE", loginType);
                                             editor.apply();
@@ -175,7 +174,6 @@ public class MainActivity extends AppCompatActivity {
 
                                             SharedPreferences.Editor editor = pref.edit();
                                             editor.putString("KEY_ID", loginLecturer.getLecturerID());
-                                            editor.putString("KEY_PASSWORD", loginLecturer.getLecturerPassword());
                                             editor.putString("KEY_NAME", loginLecturer.getLecturerName());
                                             editor.putString("KEY_TYPE", loginType);
                                             editor.apply();

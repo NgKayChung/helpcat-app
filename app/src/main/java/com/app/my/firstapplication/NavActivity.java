@@ -21,13 +21,13 @@ import android.widget.Toast;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class NavActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class NavActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     ViewPager viewPager;
     LinearLayout sliderDotspanel;
     private int dotscount;
     private ImageView[] dots;
     private ImageView eventImg;
+    private int backButtonCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,11 +135,18 @@ public class NavActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            android.os.Process.killProcess(android.os.Process.myPid());
-            System.exit(0);
+            if(backButtonCount >= 1) {
+                backButtonCount = 0;
+                android.os.Process.killProcess(android.os.Process.myPid());
+                System.exit(1);
+            } else {
+                Toast.makeText(this, "Press the back button once again to close the application.", Toast.LENGTH_LONG).show();
+                backButtonCount++;
+            }
         }
     }
 
