@@ -100,11 +100,19 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
         navigationView.setNavigationItemSelectedListener(this);
 
         eventImg = (ImageView) findViewById(R.id.event_img);
+        ImageView scannerImg = (ImageView) findViewById(R.id.classes_img);
 
         eventImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(NavActivity.this, MainEvent.class));
+            }
+        });
+
+        scannerImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(NavActivity.this, Scanner.class));
             }
         });
     }

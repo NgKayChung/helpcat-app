@@ -1,22 +1,18 @@
 package com.app.my.firstapplication;
 
-
-
 import android.support.v7.app.AppCompatActivity;
-        import android.os.Bundle;
-        import android.view.View;
-        import android.widget.Toast;
-
-        import com.google.zxing.Result;
-
-        import me.dm7.barcodescanner.zxing.ZXingScannerView;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
+import com.google.zxing.Result;
+import me.dm7.barcodescanner.zxing.*;
 
 public class Scanner extends AppCompatActivity implements ZXingScannerView.ResultHandler{
     private ZXingScannerView zXingScannerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_scanner);
     }
 
     public void scan(View view){
@@ -35,8 +31,7 @@ public class Scanner extends AppCompatActivity implements ZXingScannerView.Resul
 
     @Override
     public void handleResult(Result result) {
-        Toast.makeText(getApplicationContext(),result.getText(),Toast.LENGTH_SHORT).show();
-        zXingScannerView.resumeCameraPreview(this);
-
+            Toast.makeText(getApplicationContext(),result.getText(),Toast.LENGTH_SHORT).show();
+            zXingScannerView.resumeCameraPreview(this);
     }
 }

@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
                                             dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                                                 @Override
                                                 public void onDismiss(DialogInterface dialog) {
-                                                    startActivity(new Intent(MainActivity.this, NavActivity.class));
+                                                    startActivity(new Intent(MainActivity.this, Scanner.class));
                                                 }
                                             });
                                         } else {
