@@ -21,7 +21,7 @@ public class HomeActivity extends Activity {
         }
         else {
             //preferences existed
-            Intent intent = new Intent(this, Scanner.class);
+            Intent intent = new Intent(this, NavActivity.class);
             startActivity(intent);
         }
     }

@@ -33,7 +33,10 @@
             android:name=".MainEvent"
             android:label="@string/event_page"
             android:parentActivityName=".NavActivity"></activity>
-        <activity android:name=".Scanner"></activity>
+        <activity
+            android:name=".Scanner"
+            android:label="Attendance"
+            android:parentActivityName=".NavActivity"></activity>
     </application>
 
 </manifest>
