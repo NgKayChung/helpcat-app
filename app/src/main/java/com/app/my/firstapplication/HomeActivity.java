@@ -16,12 +16,12 @@ public class HomeActivity extends Activity {
 
         if(savedPrefs.getString("KEY_ID", null) == null) {
             //if no saved preferences / records
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         }
         else {
             //preferences existed
-            Intent intent = new Intent(this, NavActivity.class);
+            Intent intent = new Intent(this, NavActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         }
     }

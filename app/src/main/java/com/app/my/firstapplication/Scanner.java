@@ -26,12 +26,16 @@ public class Scanner extends AppCompatActivity implements ZXingScannerView.Resul
     @Override
     protected void onPause() {
         super.onPause();
-        zXingScannerView.stopCamera();
     }
 
     @Override
     public void handleResult(Result result) {
             Toast.makeText(getApplicationContext(),result.getText(),Toast.LENGTH_SHORT).show();
             zXingScannerView.resumeCameraPreview(this);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

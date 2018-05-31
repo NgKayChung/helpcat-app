@@ -7,9 +7,7 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
-    <string name="studentid_text">Student ID</string>
-    <string name="lecturerid_text">Lecturer ID</string>
+    <string name="loginid_text">Login ID</string>
     <string name="password_text">Password</string>
     <string name="event_page">Upcoming Events</string>
     <string name="logout">Logout</string>
