@@ -4,8 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import android.content.SharedPreferences;
@@ -13,8 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.google.firebase.database.*;
-
-import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
     private TextView id_lbl, pass_lbl;
@@ -82,28 +78,19 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             try {
-                                HashMap<String, Object> userdata = (HashMap<String, Object>) dataSnapshot.getValue();
+                                Student user = dataSnapshot.getValue(Student.class);
 
-                                if (login_password.equals((String)userdata.get("password"))) {
-                                    String userID = (String) userdata.get("ID");
-                                    String user_fullname = (String) userdata.get("fullname");
-                                    String loginType = "";
+                                if (login_password.equals(user.getPassword())) {
+                                    user.determineLogin();
 
                                     dTitle.setText("Successful");
-                                    desc_txt.setText(user_fullname);
+                                    desc_txt.setText(user.toString());
                                     dialog.show();
 
-                                    if(userID.startsWith("C"))
-                                        loginType = "student";
-                                    else if(userID.startsWith("I"))
-                                        loginType = "lecturer";
-                                    else
-                                        loginType = userID;
-
                                     SharedPreferences.Editor editor = pref.edit();
-                                    editor.putString("KEY_ID", userID);
-                                    editor.putString("KEY_NAME", user_fullname);
-                                    editor.putString("KEY_TYPE", loginType);
+                                    editor.putString("KEY_ID", user.getID());
+                                    editor.putString("KEY_NAME", user.getFullname());
+                                    editor.putString("KEY_TYPE", user.getLoginType());
                                     editor.apply();
 
                                     dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {

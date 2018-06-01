@@ -17,9 +17,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import android.content.SharedPreferences;
+
+import com.google.firebase.database.*;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
+import java.util.HashMap;
 
 public class NavActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     ViewPager viewPager;
@@ -99,12 +104,21 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ImageView scannerImg = (ImageView) findViewById(R.id.classes_img);
+        ImageView scannerImg = (ImageView) findViewById(R.id.attendance_img);
 
         scannerImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(NavActivity.this, Scanner.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+            }
+        });
+
+        ImageView addImg = (ImageView) findViewById(R.id.classes_img);
+
+        addImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }

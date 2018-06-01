@@ -1,32 +1,33 @@
 package com.app.my.firstapplication;
 
-public class Student extends Object {
-    private String studentName;
-    private String studentID;
-    private String studentPassword;
+public class Student extends User {
+    private int subjectNumber;
 
     public Student() {}
 
-    public Student(String studentName, String studentID, String studentPasword) {
-        this.studentName = studentName;
-        this.studentID = studentID;
-        this.studentPassword = studentPasword;
+    public Student(String ID, String fullname, String password, int subjectNumber) {
+        super(ID, fullname, password);
+        this.subjectNumber = subjectNumber;
     }
 
     public String getStudentName() {
-        return studentName;
+        return super.getFullname();
     }
 
     public String getStudentID() {
-        return studentID;
+        return super.getID();
     }
 
     public String getStudentPassword() {
-        return studentPassword;
+        return super.getPassword();
+    }
+
+    public int getSubjectNumber() {
+        return this.subjectNumber;
     }
 
     @Override
     public String toString() {
-        return ("Student Name : " + studentName + "\nStudentID : " + studentID);
+        return ("Student Name : " + super.getFullname() + "\nStudentID : " + super.getID() + "\nNum of Subjects : " + this.subjectNumber);
     }
 }

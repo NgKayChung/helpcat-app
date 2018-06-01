@@ -16,11 +16,10 @@ public class Scanner extends AppCompatActivity implements ZXingScannerView.Resul
     }
 
     public void scan(View view){
-        zXingScannerView =new ZXingScannerView(getApplicationContext());
+        zXingScannerView = new ZXingScannerView(getApplicationContext());
         setContentView(zXingScannerView);
         zXingScannerView.setResultHandler(this);
         zXingScannerView.startCamera();
-
     }
 
     @Override
