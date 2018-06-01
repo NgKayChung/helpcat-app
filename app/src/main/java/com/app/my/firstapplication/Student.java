@@ -1,13 +1,18 @@
 package com.app.my.firstapplication;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class Student extends User {
     private int subjectNumber;
+    private ArrayList<CourseSubject> subjects;
 
     public Student() {}
 
-    public Student(String ID, String fullname, String password, int subjectNumber) {
+    public Student(String ID, String fullname, String password, int subjectNumber, ArrayList<CourseSubject> subjects) {
         super(ID, fullname, password);
         this.subjectNumber = subjectNumber;
+        this.subjects = subjects;
     }
 
     public String getStudentName() {
@@ -26,8 +31,18 @@ public class Student extends User {
         return this.subjectNumber;
     }
 
+    public ArrayList<CourseSubject> getSubjects() {
+        return this.subjects;
+    }
+
     @Override
     public String toString() {
-        return ("Student Name : " + super.getFullname() + "\nStudentID : " + super.getID() + "\nNum of Subjects : " + this.subjectNumber);
+        String retString = "Student Name : " + super.getFullname() + "\nStudentID : " + super.getID() + "\n";
+
+        for (CourseSubject subject : subjects) {
+            retString += subject + "\n";
+        }
+        retString += "Num of Subjects : " + subjects.size();
+        return retString;
     }
 }

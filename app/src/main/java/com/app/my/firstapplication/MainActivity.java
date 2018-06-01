@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import android.content.SharedPreferences;
@@ -78,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             try {
-                                Student user = dataSnapshot.getValue(Student.class);
+                                User user = dataSnapshot.getValue(User.class);
 
                                 if (login_password.equals(user.getPassword())) {
                                     user.determineLogin();
