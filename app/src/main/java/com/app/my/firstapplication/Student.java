@@ -9,10 +9,16 @@ public class Student extends User {
 
     public Student() {}
 
-    public Student(String ID, String fullname, String password, int subjectNumber, ArrayList<CourseSubject> subjects) {
+    public Student(String ID, String fullname, String password) {
         super(ID, fullname, password);
-        this.subjectNumber = subjectNumber;
+        this.subjects = null;
+        this.subjectNumber = 0;
+    }
+
+    public Student(String ID, String fullname, String password, ArrayList<CourseSubject> subjects) {
+        super(ID, fullname, password);
         this.subjects = subjects;
+        this.subjectNumber = this.subjects.size();
     }
 
     public String getStudentName() {
