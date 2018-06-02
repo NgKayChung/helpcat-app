@@ -121,6 +121,15 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
 
             }
         });
+
+        ImageView changePasswordImg = (ImageView) findViewById(R.id.changePassword_img);
+
+        changePasswordImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(NavActivity.this, StudentChangPassword.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+            }
+        });
     }
 
     public class MyTimerTask extends TimerTask {
