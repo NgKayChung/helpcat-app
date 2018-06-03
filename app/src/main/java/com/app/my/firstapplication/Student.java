@@ -1,7 +1,6 @@
 package com.app.my.firstapplication;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Student extends User {
     private int subjectNumber;

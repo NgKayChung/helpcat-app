@@ -40,7 +40,7 @@
             android:label="Attendance"
             android:parentActivityName=".NavActivity"></activity>
         <activity
-            android:name=".StudentChangPassword"
+            android:name=".StudentChangePassword"
             android:label="Change Password"
             android:parentActivityName=".NavActivity"></activity>
     </application>

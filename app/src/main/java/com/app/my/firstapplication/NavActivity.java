@@ -17,14 +17,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-import android.content.SharedPreferences;
-
-import com.google.firebase.database.*;
 
 import java.util.Timer;
 import java.util.TimerTask;
-
-import java.util.HashMap;
 
 public class NavActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     ViewPager viewPager;
@@ -127,7 +122,7 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
         changePasswordImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(NavActivity.this, StudentChangPassword.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                startActivity(new Intent(NavActivity.this, StudentChangePassword.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
     }
