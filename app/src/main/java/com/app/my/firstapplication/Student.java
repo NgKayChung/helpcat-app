@@ -8,24 +8,28 @@ public class Student extends User {
 
     public Student() {}
 
-    public Student(String ID, String fullname, String password) {
-        super(ID, fullname, password);
+    public Student(String ID, String emailAddress, String fullname, String password) {
+        super(ID, emailAddress, fullname, password);
         this.subjects = null;
         this.subjectNumber = 0;
     }
 
-    public Student(String ID, String fullname, String password, ArrayList<CourseSubject> subjects) {
-        super(ID, fullname, password);
+    public Student(String ID, String emailAddress, String fullname, String password, ArrayList<CourseSubject> subjects) {
+        super(ID, emailAddress, fullname, password);
         this.subjects = subjects;
         this.subjectNumber = this.subjects.size();
     }
 
-    public String getStudentName() {
-        return super.getFullname();
-    }
-
     public String getStudentID() {
         return super.getID();
+    }
+
+    public String getStudentEmailAddress() {
+        return super.getEmailAddress();
+    }
+
+    public String getStudentName() {
+        return super.getFullname();
     }
 
     public String getStudentPassword() {
@@ -42,7 +46,7 @@ public class Student extends User {
 
     @Override
     public String toString() {
-        String retString = "Student Name : " + super.getFullname() + "\nStudentID : " + super.getID() + "\n";
+        String retString = "Student ID : " + super.getID() + "\nEmail Address : " + super.getEmailAddress() + "\nStudent Name : " + super.getFullname() + "\n";
 
         for (CourseSubject subject : subjects) {
             retString += subject + "\n";

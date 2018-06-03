@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.google.firebase.database.*;
 
-public class StudentChangePassword extends AppCompatActivity {
+public class UserChangePassword extends AppCompatActivity {
     private TextInputLayout textInputOldPassword, textInputNewPassword, textInputRetypeNewPassword;
     private Button changePassword_btn;
 
@@ -33,10 +33,10 @@ public class StudentChangePassword extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_change_password);
+        setContentView(R.layout.activity_user_change_password);
 
         //initialize dialog box components
-        dBuilder = new AlertDialog.Builder(StudentChangePassword.this);
+        dBuilder = new AlertDialog.Builder(UserChangePassword.this);
         dView = getLayoutInflater().inflate(R.layout.box_dialog, null);
         dTitle = (TextView) dView.findViewById(R.id.dialog_titleTxt);
         desc_txt = (TextView) dView.findViewById(R.id.dialog_descTxt);
@@ -50,6 +50,20 @@ public class StudentChangePassword extends AppCompatActivity {
         firebase = FirebaseDatabase.getInstance();
 
         pref = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+
+        firebase.getReference("users").child(pref.getString("KEY_ID", null)).child("password").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                currentPassword = (String) dataSnapshot.getValue();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                dTitle.setText("Error");
+                desc_txt.setText("Connection error");
+                dialog.show();
+            }
+        });
 
         changePassword_btn = (Button) findViewById(R.id.changePassword_btn);
 
@@ -71,20 +85,6 @@ public class StudentChangePassword extends AppCompatActivity {
         newPassword = textInputNewPassword.getEditText().getText().toString().trim();
         String retypePassword = textInputRetypeNewPassword.getEditText().getText().toString().trim();
         boolean success = true;
-
-        firebase.getReference("users").child(pref.getString("KEY_ID", null)).child("password").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                currentPassword = (String) dataSnapshot.getValue();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                dTitle.setText("Error");
-                desc_txt.setText("Connection error");
-                dialog.show();
-            }
-        });
 
         if(oldPassword.isEmpty()) {
             textInputOldPassword.setError("Field cannot be empty");

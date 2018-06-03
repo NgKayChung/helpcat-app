@@ -16,18 +16,27 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class NavActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    ViewPager viewPager;
-    LinearLayout sliderDotspanel;
+    private ViewPager viewPager;
+    private LinearLayout sliderDotspanel;
     private int dotscount;
     private ImageView[] dots;
     private ImageView eventImg;
+
     private int backButtonCount = 0;
+
+    private ImageView button1_img, button2_img, button3_img, button4_img;
+    private TextView button1_txt, button2_txt, button3_txt, button4_txt;
+
+    private SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,19 +45,97 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
+        button1_img = (ImageView) findViewById(R.id.button1_img);
+        button1_txt = (TextView) findViewById(R.id.button1_text);
+        button2_img = (ImageView) findViewById(R.id.button2_img);
+        button2_txt = (TextView) findViewById(R.id.button2_text);
+        button3_img = (ImageView) findViewById(R.id.button3_img);
+        button3_txt = (TextView) findViewById(R.id.button3_text);
+        button4_img = (ImageView) findViewById(R.id.button4_img);
+        button4_txt = (TextView) findViewById(R.id.button4_text);
+
+        pref = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+        final String userType = pref.getString("KEY_TYPE", "student");
+
+        if(userType.equals("student")) {
+            button1_img.setImageResource(R.drawable.ic_school_black_24dp);
+            button1_img.setBackground(getDrawable(R.drawable.buttonbackground));
+            button1_txt.setText("CLASSES");
+
+            button2_img.setImageResource(R.drawable.ic_event_note_black_24dp);
+            button2_img.setBackground(getDrawable(R.drawable.buttonbackground));
+            button2_txt.setText("ATTENDANCE");
+
+            button3_img.setImageResource(R.drawable.ic_event_available_black_24dp);
+            button3_img.setBackground(getDrawable(R.drawable.buttonbackground));
+            button3_txt.setText("ATTENDANCE");
+
+            button3_img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(NavActivity.this, Scanner.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                }
+            });
+
+            button4_img.setImageResource(R.drawable.ic_menu_manage);
+            button4_img.setBackground(getDrawable(R.drawable.buttonbackground));
+            button4_txt.setText("CHANGE PASSWORD");
+
+            button4_img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(NavActivity.this, UserChangePassword.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                }
+            });
+        } else if(userType.equals("lecturer")) {
+            button1_img.setImageResource(R.drawable.ic_school_black_24dp);
+            button1_img.setBackground(getDrawable(R.drawable.buttonbackground));
+            button1_txt.setText("CLASSES");
+
+            button2_img.setImageResource(R.drawable.ic_event_note_black_24dp);
+            button2_img.setBackground(getDrawable(R.drawable.buttonbackground));
+            button2_txt.setText("ATTENDANCE");
+
+            button3_img.setImageResource(R.drawable.ic_menu_camera);
+            button3_img.setBackground(getDrawable(R.drawable.buttonbackground));
+            button3_txt.setText("ATTENDANCE");
+
+            button3_img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(NavActivity.this, Scanner.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                }
+            });
+
+            button4_img.setImageResource(R.drawable.ic_menu_manage);
+            button4_img.setBackground(getDrawable(R.drawable.buttonbackground));
+            button4_txt.setText("CHANGE PASSWORD");
+
+            button4_img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(NavActivity.this, UserChangePassword.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                }
+            });
+        } else {
+            button1_img.setImageResource(R.drawable.ic_event_available_black_24dp);
+            button1_img.setBackground(getDrawable(R.drawable.buttonbackground));
+            button1_txt.setText("SUBJECT APPROVAL");
+
+            button2_img.setImageResource(R.drawable.ic_menu_manage);
+            button2_img.setBackground(getDrawable(R.drawable.buttonbackground));
+            button2_txt.setText("RESET USER PASSWORD");
+        }
+
         viewPager = (ViewPager) findViewById(R.id.viewPager);
-
         sliderDotspanel = (LinearLayout) findViewById(R.id.sliderDots);
-
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);
-
         viewPager.setAdapter(viewPagerAdapter);
 
         dotscount = viewPagerAdapter.getCount();
         dots = new ImageView[dotscount];
 
-        for(int i = 0; i < dotscount; i++){
-
+        for(int i = 0; i < dotscount; i++) {
             dots[i] = new ImageView(this);
             dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.nonactive_dot));
 
@@ -57,32 +144,25 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
             params.setMargins(8, 0, 8, 0);
 
             sliderDotspanel.addView(dots[i], params);
-
         }
 
         dots[0].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot));
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
 
             @Override
             public void onPageSelected(int position) {
-
-                for(int i = 0; i< dotscount; i++){
+                for(int i = 0; i< dotscount; i++) {
                     dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.nonactive_dot));
                 }
 
                 dots[position].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.active_dot));
-
             }
 
             @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
+            public void onPageScrollStateChanged(int state) {}
         });
 
         Timer timer = new Timer();
@@ -99,54 +179,33 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ImageView scannerImg = (ImageView) findViewById(R.id.attendance_img);
+        View sidebar_view = navigationView.getHeaderView(0);
 
-        scannerImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(NavActivity.this, Scanner.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-            }
-        });
+        final TextView name_textView = (TextView) sidebar_view.findViewById(R.id.name_textView);
+        name_textView.setText(pref.getString("KEY_NAME", "Name"));
 
-        ImageView addImg = (ImageView) findViewById(R.id.classes_img);
-
-        addImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        ImageView changePasswordImg = (ImageView) findViewById(R.id.changePassword_img);
-
-        changePasswordImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(NavActivity.this, StudentChangePassword.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-            }
-        });
+        final TextView email_textView = (TextView) sidebar_view.findViewById(R.id.email_textView);
+        email_textView.setText(pref.getString("KEY_EMAIL", "Email Address"));
     }
 
-    public class MyTimerTask extends TimerTask {
-
+    public class MyTimerTask extends TimerTask
+    {
         @Override
-        public void run() {
-
+        public void run()
+        {
             NavActivity.this.runOnUiThread(new Runnable() {
                 @Override
-                public void run() {
-
-                    if(viewPager.getCurrentItem() == 0){
+                public void run()
+                {
+                    if(viewPager.getCurrentItem() == 0) {
                         viewPager.setCurrentItem(1);
-                    } else if(viewPager.getCurrentItem() == 1){
+                    } else if(viewPager.getCurrentItem() == 1) {
                         viewPager.setCurrentItem(2);
                     } else {
                         viewPager.setCurrentItem(0);
                     }
-
                 }
             });
-
         }
     }
 

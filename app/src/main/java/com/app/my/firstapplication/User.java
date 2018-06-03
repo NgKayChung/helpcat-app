@@ -2,20 +2,26 @@ package com.app.my.firstapplication;
 
 public class User extends Object {
     private String ID;
+    private String emailAddress;
     private String fullname;
     private String password;
     private String loginType;
 
     public User(){}
 
-    public User(String ID, String fullname, String password) {
+    public User(String ID, String emailAddress, String fullname, String password) {
         this.ID = ID;
+        this.emailAddress = emailAddress;
         this.fullname = fullname;
         this.password = password;
     }
 
     public String getID() {
         return this.ID;
+    }
+
+    public String getEmailAddress() {
+        return this.emailAddress;
     }
 
     public String getFullname() {
@@ -41,6 +47,6 @@ public class User extends Object {
 
     @Override
     public String toString() {
-        return ID + " " + fullname + " " + password + " " + loginType;
+        return ID + "\n" + emailAddress + "\n" + fullname + "\n" + loginType;
     }
 }

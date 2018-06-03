@@ -39,9 +39,10 @@
         android:orientation="vertical"
         android:weightSum="2"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sliderDots"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="1dp">
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -65,29 +66,28 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
+                        android:id="@+id/button1_layout"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1">
 
                         <ImageView
-                            android:id="@+id/classes_img"
+                            android:id="@+id/button1_img"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_alignParentStart="true"
                             android:layout_alignParentTop="true"
                             android:layout_weight="1"
-                            android:background="@drawable/buttonbackground"
-                            android:padding="20dp"
-                            android:src="@drawable/ic_school_black_24dp" />
+                            android:padding="20dp" />
 
                         <TextView
-                            android:id="@+id/classes_text"
+                            android:id="@+id/button1_text"
                             android:layout_width="match_parent"
                             android:layout_height="22dp"
                             android:layout_alignParentBottom="true"
                             android:layout_alignParentStart="true"
                             android:layout_weight="1"
-                            android:text="CLASSES"
+                            android:text=""
                             android:textAlignment="center"
                             android:textAppearance="@style/TextAppearance.AppCompat.Button"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -109,27 +109,26 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
+                        android:id="@+id/button2_layout"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="1">
+                        android:layout_weight="1" >
 
                         <ImageView
-                            android:id="@+id/event_img"
+                            android:id="@+id/button2_img"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:background="@drawable/buttonbackground"
-                            android:padding="20dp"
-                            android:src="@drawable/ic_event_note_black_24dp" />
+                            android:padding="20dp" />
 
                         <TextView
-                            android:id="@+id/attendance_text2"
+                            android:id="@+id/button2_text"
                             android:layout_width="match_parent"
                             android:layout_height="22dp"
                             android:layout_alignParentBottom="true"
                             android:layout_alignParentStart="true"
                             android:layout_weight="1"
-                            android:text="ATTENDANCE"
+                            android:text=""
                             android:textAlignment="center"
                             android:textAppearance="@style/TextAppearance.AppCompat.Button"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -169,27 +168,26 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
+                        android:id="@+id/button3_layout"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1">
 
                         <ImageView
-                            android:id="@+id/attendance_img"
+                            android:id="@+id/button3_img"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:background="@drawable/buttonbackground"
-                            android:padding="20dp"
-                            app:srcCompat="@drawable/ic_event_available_black_24dp" />
+                            android:padding="20dp" />
 
                         <TextView
-                            android:id="@+id/attendance_text"
+                            android:id="@+id/button3_text"
                             android:layout_width="match_parent"
                             android:layout_height="22dp"
                             android:layout_alignParentBottom="true"
                             android:layout_alignParentStart="true"
                             android:layout_weight="1"
-                            android:text="ATTENDANCE"
+                            android:text=""
                             android:textAlignment="center"
                             android:textAppearance="@style/TextAppearance.AppCompat.Button"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -212,30 +210,29 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
+                        android:id="@+id/button4_layout"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1">
 
                         <ImageView
-                            android:id="@+id/changePassword_img"
+                            android:id="@+id/button4_img"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:background="@drawable/buttonbackground"
-                            android:paddingTop="20dp"
+                            android:paddingBottom="30dp"
                             android:paddingLeft="10dp"
                             android:paddingRight="10dp"
-                            android:paddingBottom="30dp"
-                            android:src="@drawable/ic_menu_manage" />
+                            android:paddingTop="20dp" />
 
                         <TextView
-                            android:id="@+id/changePassword_text"
+                            android:id="@+id/button4_text"
                             android:layout_width="match_parent"
                             android:layout_height="22dp"
                             android:layout_alignParentBottom="true"
                             android:layout_alignParentStart="true"
                             android:layout_weight="1"
-                            android:text="CHANGE PASSWORD"
+                            android:text=""
                             android:textAlignment="center"
                             android:textAppearance="@style/TextAppearance.AppCompat.Button"
                             app:layout_constraintBottom_toBottomOf="parent"
