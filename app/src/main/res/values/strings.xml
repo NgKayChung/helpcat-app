@@ -11,4 +11,14 @@
     <string name="password_text">Password</string>
     <string name="event_page">Upcoming Events</string>
     <string name="logout">Logout</string>
+
+    <string-array name="subjectList">
+        <item> </item>
+        <item>Computer System</item>
+        <item>Software project</item>
+        <item>Computing math</item>
+        <item>C++</item>
+        <item>Java I</item>
+        <item>Java II</item>
+    </string-array>
 </resources>

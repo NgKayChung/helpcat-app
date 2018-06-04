@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.app.my.firstapplication">
-    <uses-sdk android:minSdkVersion="4" android:targetSdkVersion="15" />
 
-    <uses-feature android:name="android.hardware.camera"
+    <uses-sdk
+        android:minSdkVersion="4"
+        android:targetSdkVersion="15" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
         android:required="true" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -16,7 +23,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".HomeActivity"
             android:label="@string/app_name"
@@ -30,15 +37,16 @@
         <activity
             android:name=".NavActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MainEvent"
             android:label="@string/event_page"
-            android:parentActivityName=".NavActivity"></activity>
+            android:parentActivityName=".NavActivity" />
         <activity
             android:name=".Scanner"
             android:label="Attendance"
-            android:parentActivityName=".NavActivity"></activity>
+            android:parentActivityName=".NavActivity" />
+        <activity android:name=".StudentEnroll"></activity>
     </application>
 
 </manifest>
