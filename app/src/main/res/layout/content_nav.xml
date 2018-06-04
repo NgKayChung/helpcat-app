@@ -39,9 +39,10 @@
         android:orientation="vertical"
         android:weightSum="2"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sliderDots"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="1dp">
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -51,7 +52,6 @@
             tools:layout_editor_absoluteY="175dp">
 
             <LinearLayout
-                android:id="@+id/linearLayout"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
@@ -66,29 +66,28 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
+                        android:id="@+id/button1_layout"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1">
 
                         <ImageView
-                            android:id="@+id/classes_img"
+                            android:id="@+id/button1_img"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_alignParentStart="true"
                             android:layout_alignParentTop="true"
                             android:layout_weight="1"
-                            android:background="@drawable/circlebackground"
-                            android:padding="10dp"
-                            android:src="@drawable/ic_school_black_24dp" />
+                            android:padding="20dp" />
 
                         <TextView
-                            android:id="@+id/classes_text"
+                            android:id="@+id/button1_text"
                             android:layout_width="match_parent"
-                            android:layout_height="19dp"
+                            android:layout_height="22dp"
                             android:layout_alignParentBottom="true"
                             android:layout_alignParentStart="true"
                             android:layout_weight="1"
-                            android:text="CLASSES"
+                            android:text=""
                             android:textAlignment="center"
                             android:textAppearance="@style/TextAppearance.AppCompat.Button"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -109,14 +108,38 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <ImageView
-                        android:id="@+id/event_img"
+                    <RelativeLayout
+                        android:id="@+id/button2_layout"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/circlebackground"
-                        android:padding="10dp"
-                        app:srcCompat="@drawable/ic_event_note_black_24dp" />
+                        android:layout_weight="1" >
+
+                        <ImageView
+                            android:id="@+id/button2_img"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:padding="20dp" />
+
+                        <TextView
+                            android:id="@+id/button2_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="22dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_weight="1"
+                            android:text=""
+                            android:textAlignment="center"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.926"
+                            tools:ignore="MissingConstraints" />
+                    </RelativeLayout>
+
                 </LinearLayout>
 
             </LinearLayout>
@@ -124,14 +147,12 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:orientation="horizontal"
             android:weightSum="2">
 
             <LinearLayout
-                android:id="@+id/linearLayout"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
@@ -147,27 +168,26 @@
                     android:orientation="vertical">
 
                     <RelativeLayout
+                        android:id="@+id/button3_layout"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1">
 
                         <ImageView
-                            android:id="@+id/attendance_img"
+                            android:id="@+id/button3_img"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:background="@drawable/circlebackground"
-                            android:padding="10dp"
-                            app:srcCompat="@drawable/ic_event_available_black_24dp" />
+                            android:padding="20dp" />
 
                         <TextView
-                            android:id="@+id/attendance_text"
+                            android:id="@+id/button3_text"
                             android:layout_width="match_parent"
-                            android:layout_height="19dp"
+                            android:layout_height="22dp"
                             android:layout_alignParentBottom="true"
                             android:layout_alignParentStart="true"
                             android:layout_weight="1"
-                            android:text="ATTENDANCE"
+                            android:text=""
                             android:textAlignment="center"
                             android:textAppearance="@style/TextAppearance.AppCompat.Button"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -189,14 +209,41 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <ImageView
-                        android:id="@+id/img"
+                    <RelativeLayout
+                        android:id="@+id/button4_layout"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/circlebackground"
-                        android:padding="10dp"
-                        app:srcCompat="@drawable/ic_event_note_black_24dp" />
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/button4_img"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:paddingBottom="30dp"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:paddingTop="20dp" />
+
+                        <TextView
+                            android:id="@+id/button4_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="22dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_weight="1"
+                            android:text=""
+                            android:textAlignment="center"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.926"
+                            tools:ignore="MissingConstraints" />
+                    </RelativeLayout>
+
                 </LinearLayout>
 
             </LinearLayout>

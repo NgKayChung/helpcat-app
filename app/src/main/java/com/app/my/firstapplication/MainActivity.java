@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                                     SharedPreferences.Editor editor = pref.edit();
                                     editor.putString("KEY_ID", user.getID());
                                     editor.putString("KEY_NAME", user.getFullname());
+                                    editor.putString("KEY_EMAIL", user.getEmailAddress());
                                     editor.putString("KEY_TYPE", user.getLoginType());
                                     editor.apply();
 
