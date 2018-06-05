@@ -62,6 +62,13 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
             button1_img.setBackground(getDrawable(R.drawable.buttonbackground));
             button1_txt.setText("CLASSES");
 
+            button1_img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(NavActivity.this, StudentEnroll.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                }
+            });
+
             button2_img.setImageResource(R.drawable.ic_event_note_black_24dp);
             button2_img.setBackground(getDrawable(R.drawable.buttonbackground));
             button2_txt.setText("ATTENDANCE");

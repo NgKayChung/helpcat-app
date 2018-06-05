@@ -45,16 +45,14 @@
         <activity
             android:name=".Scanner"
             android:label="Attendance"
-<<<<<<< HEAD
             android:parentActivityName=".NavActivity" />
-        <activity android:name=".StudentEnroll"></activity>
-=======
-            android:parentActivityName=".NavActivity"></activity>
+        <activity android:name=".StudentEnroll"
+            android:label="Enroll / Drop Subject"
+            android:parentActivityName=".NavActivity" />
         <activity
             android:name=".UserChangePassword"
             android:label="Change Password"
-            android:parentActivityName=".NavActivity"></activity>
->>>>>>> 27fcf1196da91884d67dd30a8980585fa328c758
+            android:parentActivityName=".NavActivity" />
     </application>
 
 </manifest>
