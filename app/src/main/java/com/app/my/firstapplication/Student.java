@@ -3,7 +3,6 @@ package com.app.my.firstapplication;
 import java.util.ArrayList;
 
 public class Student extends User {
-    private int subjectNumber;
     private ArrayList<CourseSubject> subjects;
 
     public Student() {}
@@ -11,13 +10,11 @@ public class Student extends User {
     public Student(String ID, String emailAddress, String fullname, String password) {
         super(ID, emailAddress, fullname, password);
         this.subjects = null;
-        this.subjectNumber = 0;
     }
 
     public Student(String ID, String emailAddress, String fullname, String password, ArrayList<CourseSubject> subjects) {
         super(ID, emailAddress, fullname, password);
         this.subjects = subjects;
-        this.subjectNumber = this.subjects.size();
     }
 
     public String getStudentID() {
@@ -37,11 +34,11 @@ public class Student extends User {
     }
 
     public int getSubjectNumber() {
-        return this.subjectNumber;
+        return (subjects == null ? 0 : subjects.size());
     }
 
     public ArrayList<CourseSubject> getSubjects() {
-        return this.subjects;
+        return subjects;
     }
 
     @Override
