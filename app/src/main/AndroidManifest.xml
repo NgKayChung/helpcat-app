@@ -42,7 +42,7 @@
             android:parentActivityName=".NavActivity" />
         <activity
             android:name=".StudentEnroll"
-            android:label="Enroll / Drop Subject"
+            android:label="Enroll Subject"
             android:parentActivityName=".NavActivity" />
         <activity
             android:name=".UserChangePassword"
