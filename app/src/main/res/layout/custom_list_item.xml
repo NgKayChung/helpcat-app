@@ -5,9 +5,13 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/subjectTitle"
-        android:layout_width="327dp"
+        android:id="@+id/subjectText"
+        android:layout_width="315dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="2dp"
         android:gravity="center_vertical"
         android:minHeight="?android:attr/listPreferredItemHeightSmall"
         android:textAppearance="?android:attr/textAppearanceListItemSmall" />
@@ -18,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
+        android:layout_marginRight="5dp"
         app:srcCompat="@android:drawable/ic_delete" />
 
 </RelativeLayout>

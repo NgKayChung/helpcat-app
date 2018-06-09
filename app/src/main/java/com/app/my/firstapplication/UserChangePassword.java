@@ -2,6 +2,7 @@ package com.app.my.firstapplication;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -75,6 +76,13 @@ public class UserChangePassword extends AppCompatActivity {
                     dTitle.setText("Successful");
                     desc_txt.setText("Password is updated");
                     dialog.show();
+
+                    dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        @Override
+                        public void onDismiss(DialogInterface dialog) {
+                            UserChangePassword.super.onBackPressed();
+                        }
+                    });
                 }
             }
         });

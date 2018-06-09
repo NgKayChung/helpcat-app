@@ -11,6 +11,14 @@ public class CourseSubject extends Object {
         this.subjectTitle = subjectTitle;
     }
 
+    public void setSubjectCode(String subjectCode) {
+        this.subjectCode = subjectCode;
+    }
+
+    public void setSubjectTitle(String subjectTitle) {
+        this.subjectTitle = subjectTitle;
+    }
+
     public String getSubjectCode() {
         return this.subjectCode;
     }
@@ -21,6 +29,6 @@ public class CourseSubject extends Object {
 
     @Override
     public String toString() {
-        return "Subject Code : " + this.subjectCode + "\nSubject Title : " + this.subjectTitle;
+        return this.subjectCode + " " + this.subjectTitle;
     }
 }

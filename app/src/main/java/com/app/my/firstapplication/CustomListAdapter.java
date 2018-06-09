@@ -9,26 +9,33 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class CustomListAdapter extends ArrayAdapter<String> {
+public class CustomListAdapter extends ArrayAdapter<CourseSubject> {
 
-    private ArrayList<String> subjectList;
-    Context mContext;
+    private ArrayList<CourseSubject> subjectList;
+    private Context mContext;
+    private int layout;
 
-    public CustomListAdapter(ArrayList<String> data, Context context) {
-        super(context, R.layout.custom_list_item, data);
+    public CustomListAdapter(ArrayList<CourseSubject> data, int RLayout, Context context) {
+        super(context, RLayout, data);
         this.subjectList = data;
-        this.mContext=context;
+        this.mContext = context;
+        this.layout = RLayout;
+    }
+
+    @Override
+    public CourseSubject getItem(int position) {
+        return subjectList.get(position);
     }
 
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         // Get the data item for this position
-        String subjectName = getItem(position);
+        String itemName = subjectList.get(position).toString();
 
         LayoutInflater inflater = LayoutInflater.from(getContext());
-        view = inflater.inflate(R.layout.custom_list_item, parent, false);
-        TextView subjectName_txt = (TextView) view.findViewById(R.id.subjectTitle);
-        subjectName_txt.setText(subjectName);
+        view = inflater.inflate(this.layout, parent, false);
+        TextView itemName_txt = (TextView) view.findViewById(R.id.subjectText);
+        itemName_txt.setText(itemName);
 
         // Return the completed view to render on screen
         return view;
