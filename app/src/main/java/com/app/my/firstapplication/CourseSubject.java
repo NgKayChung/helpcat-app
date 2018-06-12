@@ -28,6 +28,17 @@ public class CourseSubject extends Object {
     }
 
     @Override
+    public boolean equals(Object otherObject) {
+        if (!(otherObject instanceof CourseSubject)) {
+            return false;
+        }
+
+        CourseSubject otherSubject = (CourseSubject) otherObject;
+
+        return otherSubject.getSubjectCode().equals(getSubjectCode());
+    }
+
+    @Override
     public String toString() {
         return this.subjectCode + " " + this.subjectTitle;
     }

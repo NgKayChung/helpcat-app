@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
@@ -31,7 +32,7 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
     private ImageView[] dots;
     private ImageView eventImg;
 
-    private int backButtonCount = 0;
+    private boolean isBackPressed = false;
 
     private ImageView button1_img, button2_img, button3_img, button4_img;
     private TextView button1_txt, button2_txt, button3_txt, button4_txt;
@@ -80,7 +81,7 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
             button3_img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(NavActivity.this, Scanner.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    startActivity(new Intent(NavActivity.this, QRGenerate.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 }
             });
 
@@ -132,6 +133,13 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
             button2_img.setImageResource(R.drawable.ic_menu_manage);
             button2_img.setBackground(getDrawable(R.drawable.buttonbackground));
             button2_txt.setText("RESET USER PASSWORD");
+
+            button2_img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(NavActivity.this, AdminChangePass.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                }
+            });
         }
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
@@ -223,14 +231,22 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            if(backButtonCount >= 1) {
-                backButtonCount = 0;
+            if (isBackPressed) {
+                super.onBackPressed();
                 android.os.Process.killProcess(android.os.Process.myPid());
                 System.exit(1);
-            } else {
-                Toast.makeText(this, "Press the back button once again to close the application.", Toast.LENGTH_LONG).show();
-                backButtonCount++;
+                return;
             }
+
+            this.isBackPressed = true;
+            Toast.makeText(this, "Press the BACK button once again to close the application", Toast.LENGTH_SHORT).show();
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    isBackPressed = false;
+                }
+            }, 2000);
         }
     }
 

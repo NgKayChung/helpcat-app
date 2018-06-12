@@ -41,6 +41,10 @@ public class SubjectEnrollment extends Object {
         this.subjectList.add(subject);
     }
 
+    public void removeSubject(CourseSubject subject) {
+        this.subjectList.remove(subject);
+    }
+
     public String getStudentID() {
         return studentID;
     }

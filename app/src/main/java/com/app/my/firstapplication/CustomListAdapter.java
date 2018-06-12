@@ -5,12 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class CustomListAdapter extends ArrayAdapter<CourseSubject> {
-
     private ArrayList<CourseSubject> subjectList;
     private Context mContext;
     private int layout;
@@ -25,6 +25,10 @@ public class CustomListAdapter extends ArrayAdapter<CourseSubject> {
     @Override
     public CourseSubject getItem(int position) {
         return subjectList.get(position);
+    }
+
+    public int getLayout() {
+        return this.layout;
     }
 
     @Override

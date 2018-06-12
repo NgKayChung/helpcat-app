@@ -18,11 +18,13 @@ public class HomeActivity extends Activity {
             //if no saved preferences / records
             Intent intent = new Intent(this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
+            finish();
         }
         else {
             //preferences existed
             Intent intent = new Intent(this, NavActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
+            finish();
         }
     }
 }
