@@ -139,9 +139,10 @@ public class StudentEnroll extends AppCompatActivity {
 
                 subjectList.clear();
                 subjectList.add(new CourseSubject("Select", ""));
-                subjectList.addAll(allsubjects);
-                subjectList.removeAll(enrolledList);
-
+                if(allsubjects != null) {
+                    subjectList.addAll(allsubjects);
+                    subjectList.removeAll(enrolledList);
+                }
                 spinnerAdapter.notifyDataSetChanged();
                 enrolledListAdapter.notifyDataSetChanged();
             }
