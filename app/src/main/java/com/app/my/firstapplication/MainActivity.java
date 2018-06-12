@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView id_lbl, pass_lbl;
     private EditText id_txt, pass_txt;
     private Button loginButton;
+    private TextView forgotPassword_txt;
 
     private AlertDialog.Builder dBuilder;
     private AlertDialog dialog;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         pass_lbl = (TextView) findViewById(R.id.passLbl);
         id_txt = (EditText) findViewById(R.id.idTxt);
         pass_txt = (EditText) findViewById(R.id.passTxt);
+        forgotPassword_txt = (TextView) findViewById(R.id.forgotText);
         loginButton = (Button) findViewById(R.id.loginBtn);
 
         //initialize dialog box components
@@ -48,6 +50,13 @@ public class MainActivity extends AppCompatActivity {
         desc_txt = (TextView) dView.findViewById(R.id.dialog_descTxt);
         dBuilder.setView(dView);
         dialog = dBuilder.create();
+
+        forgotPassword_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ForgotPasswordActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+            }
+        });
 
         firebase = FirebaseDatabase.getInstance();
 

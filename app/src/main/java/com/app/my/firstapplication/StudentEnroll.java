@@ -120,37 +120,49 @@ public class StudentEnroll extends AppCompatActivity {
         enrollment = new SubjectEnrollment();
         enrollment.setStudentID(preferences.getString("KEY_ID", null));
 
-        enrollKey = preferences.getString("KEY_ENROLL", null);
-
-        if(enrollKey == null) {
-            DatabaseReference dref = firebaseDatabase.getReference("add_sub_approval").push();
-            enrollKey = dref.getKey();
-            preferences.edit().putString("KEY_ENROLL", enrollKey).apply();
-            dref.setValue(enrollment);
-        }
-
-        firebaseDatabase.getReference("add_sub_approval").child(enrollKey).addValueEventListener(new ValueEventListener() {
+        enrollKey = null;
+        firebaseDatabase.getReference("add_sub_approval").orderByChild("studentID").equalTo(preferences.getString("KEY_ID", null)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                enrollment = dataSnapshot.getValue(SubjectEnrollment.class);
-
-                enrolledList.clear();
-                enrolledList.addAll(enrollment.getSubjectList());
-
-                subjectList.clear();
-                subjectList.add(new CourseSubject("Select", ""));
-                if(allsubjects != null) {
-                    subjectList.addAll(allsubjects);
-                    subjectList.removeAll(enrolledList);
+                if(dataSnapshot.getChildrenCount() > 0) {
+                    enrollKey = dataSnapshot.getChildren().iterator().next().getKey();
+                } else {
+                    DatabaseReference dref = firebaseDatabase.getReference("add_sub_approval").push();
+                    enrollKey = dref.getKey();
+                    dref.setValue(enrollment);
                 }
-                spinnerAdapter.notifyDataSetChanged();
-                enrolledListAdapter.notifyDataSetChanged();
+
+                firebaseDatabase.getReference("add_sub_approval").child(enrollKey).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        enrollment = dataSnapshot.getValue(SubjectEnrollment.class);
+
+                        enrolledList.clear();
+                        enrolledList.addAll(enrollment.getSubjectList());
+
+                        subjectList.clear();
+                        subjectList.add(new CourseSubject("Select", ""));
+                        if(allsubjects != null) {
+                            subjectList.addAll(allsubjects);
+                            subjectList.removeAll(enrolledList);
+                        }
+                        spinnerAdapter.notifyDataSetChanged();
+                        enrolledListAdapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        dTitle.setText("Error");
+                        desc_txt.setText("Connection error");
+                        dialog.show();
+                    }
+                });
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 dTitle.setText("Error");
-                desc_txt.setText("Connection error");
+                desc_txt.setText("Error : " + databaseError.getMessage());
                 dialog.show();
             }
         });
@@ -169,19 +181,6 @@ public class StudentEnroll extends AppCompatActivity {
                 }
             }
         });
-
-//        for(int i = 0;i < enrolledListAdapter.getCount();i++) {
-//            ImageButton removeButton = (ImageButton) view.findViewById(R.id.removeSubjectButton);
-//            removeButton.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    dTitle.setText("Yes");
-//                    desc_txt.setText("Yes");
-//                    dialog.show();
-//                }
-//            });
-//        }
-
 
         submit_btn = (Button) findViewById(R.id.smtBtn);
         submit_btn.setOnClickListener(new View.OnClickListener() {
