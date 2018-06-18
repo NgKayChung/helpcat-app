@@ -1,18 +1,14 @@
 package com.app.my.firstapplication;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -41,8 +37,6 @@ public class StudentEnroll extends AppCompatActivity {
 
     //private Student currentStudent;
     private SubjectEnrollment enrollment;
-
-    private String enrollKey;
 
     private ArrayList<CourseSubject> allsubjects;
 
@@ -81,7 +75,7 @@ public class StudentEnroll extends AppCompatActivity {
                 enrollment.removeSubject(enrolledList.get(position));
                 spinner.setSelection(0);
 
-                firebaseDatabase.getReference("add_sub_approval").child(enrollKey).child("subjectList").setValue(enrollment.getSubjectList());
+                firebaseDatabase.getReference("add_sub_approval").child(preferences.getString("KEY_ID", null)).child("subjectList").setValue(enrollment.getSubjectList());
             }
         });
         subject_listView.setAdapter(enrolledListAdapter);
@@ -120,19 +114,15 @@ public class StudentEnroll extends AppCompatActivity {
         enrollment = new SubjectEnrollment();
         enrollment.setStudentID(preferences.getString("KEY_ID", null));
 
-        enrollKey = null;
         firebaseDatabase.getReference("add_sub_approval").orderByChild("studentID").equalTo(preferences.getString("KEY_ID", null)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.getChildrenCount() > 0) {
-                    enrollKey = dataSnapshot.getChildren().iterator().next().getKey();
-                } else {
-                    DatabaseReference dref = firebaseDatabase.getReference("add_sub_approval").push();
-                    enrollKey = dref.getKey();
+                if(dataSnapshot.getChildrenCount() <= 0) {
+                    DatabaseReference dref = firebaseDatabase.getReference("add_sub_approval").child(preferences.getString("KEY_ID", null));
                     dref.setValue(enrollment);
                 }
 
-                firebaseDatabase.getReference("add_sub_approval").child(enrollKey).addValueEventListener(new ValueEventListener() {
+                firebaseDatabase.getReference("add_sub_approval").child(preferences.getString("KEY_ID", null)).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         enrollment = dataSnapshot.getValue(SubjectEnrollment.class);
@@ -177,7 +167,7 @@ public class StudentEnroll extends AppCompatActivity {
 
                     spinner.setSelection(0);
 
-                    firebaseDatabase.getReference("add_sub_approval").child(enrollKey).child("subjectList").setValue(enrollment.getSubjectList());
+                    firebaseDatabase.getReference("add_sub_approval").child(preferences.getString("KEY_ID", null)).child("subjectList").setValue(enrollment.getSubjectList());
                 }
             }
         });
@@ -189,7 +179,7 @@ public class StudentEnroll extends AppCompatActivity {
                 enrollment.setStatus(100);
                 enrollment.setSubmitted(true);
 
-                firebaseDatabase.getReference("add_sub_approval").child(enrollKey).setValue(enrollment);
+                firebaseDatabase.getReference("add_sub_approval").child(preferences.getString("KEY_ID", null)).setValue(enrollment);
 
                 dTitle.setText("Successful");
                 desc_txt.setText("Subject(s) are enrolled successfully\nThe enrollment will send to administrator for approval");

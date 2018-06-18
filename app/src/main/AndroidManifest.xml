@@ -56,7 +56,7 @@
             android:parentActivityName=".NavActivity" />
         <activity
             android:name=".AdminChangePass"
-            android:label="Reset Student Password"
+            android:label="Reset User Password"
             android:parentActivityName=".NavActivity" />
         <activity
             android:name=".QRGenerate"
