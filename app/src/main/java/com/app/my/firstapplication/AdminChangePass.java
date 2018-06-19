@@ -61,9 +61,7 @@ public class AdminChangePass extends AppCompatActivity {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     ResetPasswordSubmission post = postSnapshot.getValue(ResetPasswordSubmission.class);
 
-                    if(post.getStatus() == 100) {
-                        resetList.add(post);
-                    }
+                    resetList.add(post);
                 }
 
                 resetListAdapter.notifyDataSetChanged();

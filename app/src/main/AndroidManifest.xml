@@ -66,6 +66,9 @@
             android:name=".ForgotPasswordActivity"
             android:label="Forgot Password"
             android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".EnrollApprovalActivity"
+            android:label="Subject Enrollment Approval"
+            android:parentActivityName=".NavActivity" />
     </application>
-
 </manifest>

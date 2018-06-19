@@ -130,6 +130,13 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
             button1_img.setBackground(getDrawable(R.drawable.buttonbackground));
             button1_txt.setText("SUBJECT APPROVAL");
 
+            button1_img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(NavActivity.this, EnrollApprovalActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                }
+            });
+
             button2_img.setImageResource(R.drawable.ic_menu_manage);
             button2_img.setBackground(getDrawable(R.drawable.buttonbackground));
             button2_txt.setText("RESET USER PASSWORD");
