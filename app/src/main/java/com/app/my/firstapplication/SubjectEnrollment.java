@@ -7,18 +7,21 @@ public class SubjectEnrollment extends Object {
     private ArrayList<CourseSubject> subjectList;
     private boolean submitted;
     private int status;
+    private String remarks;
 
     public SubjectEnrollment(){
         subjectList = new ArrayList<CourseSubject>();
-        status = 50;
+        status = 100;
         submitted = false;
+        remarks = "";
     }
 
     public SubjectEnrollment(String studentID, ArrayList<CourseSubject> subjectList) {
         this.studentID = studentID;
         this.subjectList = subjectList;
-        status = 50;
+        status = 100;
         submitted = false;
+        remarks = "";
     }
 
     public void setStudentID(String studentID) {
@@ -45,6 +48,10 @@ public class SubjectEnrollment extends Object {
         this.subjectList.remove(subject);
     }
 
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
     public String getStudentID() {
         return studentID;
     }
@@ -65,8 +72,7 @@ public class SubjectEnrollment extends Object {
         return status;
     }
 
-    @Override
-    public String toString() {
-        return super.toString();
+    public String getRemarks() {
+        return remarks;
     }
 }

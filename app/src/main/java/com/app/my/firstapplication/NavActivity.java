@@ -147,6 +147,17 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
                     startActivity(new Intent(NavActivity.this, AdminChangePass.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 }
             });
+
+            button3_img.setImageResource(R.drawable.ic_school_black_24dp);
+            button3_img.setBackground(getDrawable(R.drawable.buttonbackground));
+            button3_txt.setText("REGISTER NEW STUDENT");
+
+            button3_img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(NavActivity.this, RegisterNewStudentActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                }
+            });
         }
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);

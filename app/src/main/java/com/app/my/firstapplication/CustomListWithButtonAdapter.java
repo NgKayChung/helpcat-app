@@ -1,16 +1,9 @@
 package com.app.my.firstapplication;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.TextView;
-
-import com.app.my.firstapplication.CourseSubject;
-import com.app.my.firstapplication.CustomClickListener;
-import com.app.my.firstapplication.CustomListAdapter;
-import com.app.my.firstapplication.R;
 
 import java.util.ArrayList;
 

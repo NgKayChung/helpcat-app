@@ -1,8 +1,9 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/subjectText"
     style="?android:attr/dropDownItemStyle"
-    android:textAppearance="?android:attr/textAppearanceLargePopupMenu"
-    android:singleLine="true"
     android:layout_width="match_parent"
-    android:layout_height="?android:attr/listPreferredItemHeight"
-    android:ellipsize="marquee" />
+    android:layout_height="wrap_content"
+    android:ellipsize="marquee"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp"
+    android:textAppearance="?android:attr/textAppearanceListItemSmall" />

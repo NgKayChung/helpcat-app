@@ -33,6 +33,8 @@ public class EnrollApprovalActivity extends AppCompatActivity {
         enrollmentListAdapter = new CustomEnrollmentExpandableListAdapter(this, enrollmentList, new CustomClickListener() {
             @Override
             public void onClick(int position) {
+                enrollmentListView.collapseGroup(position);
+
                 String studentID = (String) enrollmentList.get(position).getStudentID();
                 ArrayList<CourseSubject> enrolledSubjects = (ArrayList<CourseSubject>) enrollmentList.get(position).getSubjectList();
 
@@ -42,13 +44,15 @@ public class EnrollApprovalActivity extends AppCompatActivity {
         }, new CustomClickListener() {
             @Override
             public void onClick(int position) {
+                enrollmentListView.collapseGroup(position);
+
                 String studentID = (String) enrollmentList.get(position).getStudentID();
                 firebase.getReference("add_sub_approval").child(studentID).child("status").setValue(Integer.valueOf(400));
             }
         });
         enrollmentListView.setAdapter(enrollmentListAdapter);
 
-        firebase.getReference("add_sub_approval").addValueEventListener(new ValueEventListener() {
+        firebase.getReference("add_sub_approval").orderByChild("status").equalTo(100).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 enrollmentList.clear();
@@ -56,7 +60,7 @@ public class EnrollApprovalActivity extends AppCompatActivity {
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     SubjectEnrollment post = postSnapshot.getValue(SubjectEnrollment.class);
 
-                    if(post.getStatus() == 100 && post.isSubmitted()) {
+                    if(post.isSubmitted()) {
                         enrollmentList.add(post);
                     }
                 }
@@ -74,36 +78,36 @@ public class EnrollApprovalActivity extends AppCompatActivity {
     public class CustomEnrollmentExpandableListAdapter extends BaseExpandableListAdapter
     {
         private Context context;
-        private ArrayList<SubjectEnrollment> subjectEnrollmentList;
+        private ArrayList<SubjectEnrollment> enrollmentList;
 
         private CustomClickListener approveClickListener, denyClickListener;
 
-        public CustomEnrollmentExpandableListAdapter(Context context, ArrayList<SubjectEnrollment> data, CustomClickListener approveClickListener, CustomClickListener denyClickListener) {
+        public CustomEnrollmentExpandableListAdapter(Context context, ArrayList<SubjectEnrollment> enrollmentData, CustomClickListener approveClickListener, CustomClickListener denyClickListener) {
             super();
             this.context = context;
-            this.subjectEnrollmentList = data;
+            this.enrollmentList = enrollmentData;
             this.approveClickListener = approveClickListener;
             this.denyClickListener = denyClickListener;
         }
 
         @Override
         public int getGroupCount() {
-            return subjectEnrollmentList.size();
+            return enrollmentList.size();
         }
 
         @Override
         public int getChildrenCount(int groupPosition) {
-            return subjectEnrollmentList.get(groupPosition).numberOfSubject();
+            return enrollmentList.get(groupPosition).numberOfSubject();
         }
 
         @Override
         public Object getGroup(int groupPosition) {
-            return subjectEnrollmentList.get(groupPosition);
+            return enrollmentList.get(groupPosition);
         }
 
         @Override
         public Object getChild(int groupPosition, int childPosition) {
-            return subjectEnrollmentList.get(groupPosition).getSubjectList().get(childPosition);
+            return enrollmentList.get(groupPosition).getSubjectList().get(childPosition);
         }
 
         @Override
@@ -122,7 +126,7 @@ public class EnrollApprovalActivity extends AppCompatActivity {
         }
 
         @Override
-        public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+        public View getGroupView(final int groupPosition, final boolean isExpanded, View convertView, ViewGroup parent) {
             SubjectEnrollment enrollment = (SubjectEnrollment) getGroup(groupPosition);
 
             convertView = LayoutInflater.from(context).inflate(R.layout.list_group,null);
@@ -139,8 +143,9 @@ public class EnrollApprovalActivity extends AppCompatActivity {
             approve_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(approveClickListener != null)
+                    if(approveClickListener != null) {
                         approveClickListener.onClick((Integer) v.getTag());
+                    }
                 }
             });
 
@@ -150,8 +155,9 @@ public class EnrollApprovalActivity extends AppCompatActivity {
             deny_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(denyClickListener != null)
+                    if(denyClickListener != null) {
                         denyClickListener.onClick((Integer) v.getTag());
+                    }
                 }
             });
 

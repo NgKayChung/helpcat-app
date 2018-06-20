@@ -70,5 +70,10 @@
             android:name=".EnrollApprovalActivity"
             android:label="Subject Enrollment Approval"
             android:parentActivityName=".NavActivity" />
+        <activity
+            android:name=".RegisterNewStudentActivity"
+            android:label="Register New Student"
+            android:parentActivityName=".NavActivity" />
     </application>
+
 </manifest>

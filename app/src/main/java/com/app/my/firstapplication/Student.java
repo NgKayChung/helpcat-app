@@ -3,18 +3,18 @@ package com.app.my.firstapplication;
 import java.util.ArrayList;
 
 public class Student extends User {
-    private ArrayList<CourseSubject> subjects;
+    private ArrayList<CourseSubject> enrolledSubjects;
 
     public Student() {}
 
     public Student(String ID, String emailAddress, String fullname, String password) {
         super(ID, emailAddress, fullname, password);
-        this.subjects = null;
+        this.enrolledSubjects = null;
     }
 
-    public Student(String ID, String emailAddress, String fullname, String password, ArrayList<CourseSubject> subjects) {
+    public Student(String ID, String emailAddress, String fullname, String password, ArrayList<CourseSubject> enrolledSubjects) {
         super(ID, emailAddress, fullname, password);
-        this.subjects = subjects;
+        this.enrolledSubjects = enrolledSubjects;
     }
 
     public String getStudentID() {
@@ -34,21 +34,21 @@ public class Student extends User {
     }
 
     public int getSubjectNumber() {
-        return (subjects == null ? 0 : subjects.size());
+        return (enrolledSubjects == null ? 0 : enrolledSubjects.size());
     }
 
-    public ArrayList<CourseSubject> getSubjects() {
-        return subjects;
+    public ArrayList<CourseSubject> getEnrolledSubjects() {
+        return enrolledSubjects;
     }
 
     @Override
     public String toString() {
         String retString = "Student ID : " + super.getID() + "\nEmail Address : " + super.getEmailAddress() + "\nStudent Name : " + super.getFullname() + "\n";
 
-        for (CourseSubject subject : subjects) {
+        for (CourseSubject subject : enrolledSubjects) {
             retString += subject + "\n";
         }
-        retString += "Num of Subjects : " + subjects.size();
+        retString += "Num of Subjects : " + enrolledSubjects.size();
         return retString;
     }
 }
