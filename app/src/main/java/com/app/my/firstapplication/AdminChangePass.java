@@ -37,7 +37,7 @@ public class AdminChangePass extends AppCompatActivity {
                 if(loginID.charAt(0) == 'C') {
                     newPassword = "Helpcat" + loginID.substring(loginID.length() - 3, loginID.length());
                 } else if(loginID.charAt(0) == 'I') {
-                    //if is lecturer
+                    //if lecturer
                     newPassword = "HelpcatL" + loginID.substring(loginID.length() - 4, loginID.length());
                 }
 

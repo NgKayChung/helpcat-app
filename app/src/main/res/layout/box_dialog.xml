@@ -10,7 +10,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:padding="40dp"
-        android:text="@string/alert"
         android:textSize="25sp"
         android:textStyle="bold" />
 
@@ -20,7 +19,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:paddingBottom="55dp"
-        android:text="Text"
-        android:textSize="20sp"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textSize="20sp" />
 </LinearLayout>

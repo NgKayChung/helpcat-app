@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                                 User user = dataSnapshot.getValue(User.class);
 
                                 if (login_password.equals(user.getPassword())) {
-                                    user.determineLogin();
+                                    user.determineUserType();
 
                                     dTitle.setText("Successful");
                                     desc_txt.setText(user.toString());
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                                     editor.putString("KEY_ID", user.getID());
                                     editor.putString("KEY_NAME", user.getFullname());
                                     editor.putString("KEY_EMAIL", user.getEmailAddress());
-                                    editor.putString("KEY_TYPE", user.getLoginType());
+                                    editor.putString("KEY_TYPE", user.getUserLoginType());
                                     editor.apply();
 
                                     dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
