@@ -43,7 +43,7 @@
             android:label="@string/event_page"
             android:parentActivityName=".NavActivity" />
         <activity
-            android:name=".Scanner"
+            android:name=".LecturerAttendanceActivity"
             android:label="Class Attendance"
             android:parentActivityName=".NavActivity" />
         <activity
@@ -59,7 +59,7 @@
             android:label="Reset User Password"
             android:parentActivityName=".NavActivity" />
         <activity
-            android:name=".QRGenerate"
+            android:name=".StudentAttendanceActivity"
             android:label="Attend to Class"
             android:parentActivityName=".NavActivity" />
         <activity
@@ -74,6 +74,10 @@
             android:name=".RegisterNewStudentActivity"
             android:label="Register New Student"
             android:parentActivityName=".NavActivity" />
+        <activity
+            android:name=".ScannerActivity"
+            android:label="Scan"
+            android:parentActivityName=".LecturerAttendanceActivity" />
     </application>
 
 </manifest>

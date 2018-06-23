@@ -23,6 +23,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
     private FirebaseDatabase firebase;
 
+    private boolean isSubmitted = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

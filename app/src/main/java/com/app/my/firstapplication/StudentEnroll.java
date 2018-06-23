@@ -36,14 +36,17 @@ public class StudentEnroll extends AppCompatActivity {
     private TextView desc_txt;
 
     private SharedPreferences preferences;
-    private FirebaseDatabase firebaseDatabase;
 
-    //private Student currentStudent;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference database;
+
     private SubjectEnrollment enrollment;
 
     private ArrayList<CourseSubject> allsubjects;
 
     private Student currentStudent;
+
+    private ValueEventListener subjectsListener, enrollmentExistListener, enrollmentListener;
 
     private static final GenericTypeIndicator<ArrayList<CourseSubject>> genericTypeIndicator = new GenericTypeIndicator<ArrayList<CourseSubject>>(){};
 
@@ -60,6 +63,7 @@ public class StudentEnroll extends AppCompatActivity {
         dialog = dBuilder.create();
 
         firebaseDatabase = FirebaseDatabase.getInstance();
+        database = firebaseDatabase.getReference();
         preferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
 
         setContentView(R.layout.activity_student_enroll);
@@ -89,7 +93,7 @@ public class StudentEnroll extends AppCompatActivity {
         });
         subject_listView.setAdapter(enrolledListAdapter);
 
-        firebaseDatabase.getReference("subjects").addValueEventListener(new ValueEventListener() {
+        subjectsListener = database.child("subjects").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 allsubjects = dataSnapshot.getValue(genericTypeIndicator);
@@ -109,7 +113,7 @@ public class StudentEnroll extends AppCompatActivity {
         enrollment = new SubjectEnrollment();
         enrollment.setStudentID(preferences.getString("KEY_ID", null));
 
-        firebaseDatabase.getReference("add_sub_approval").child(preferences.getString("KEY_ID", null)).addListenerForSingleValueEvent(new ValueEventListener() {
+        database.child("add_sub_approval").child(preferences.getString("KEY_ID", null)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.getChildrenCount() <= 0) {
@@ -117,7 +121,7 @@ public class StudentEnroll extends AppCompatActivity {
                     dref.setValue(enrollment);
                 }
 
-                firebaseDatabase.getReference("add_sub_approval").child(preferences.getString("KEY_ID", null)).addValueEventListener(new ValueEventListener() {
+                enrollmentListener = database.child("add_sub_approval").child(preferences.getString("KEY_ID", null)).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         enrollment = dataSnapshot.getValue(SubjectEnrollment.class);
@@ -207,6 +211,8 @@ public class StudentEnroll extends AppCompatActivity {
                 dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialog) {
+                        database.removeEventListener(subjectsListener);
+                        database.removeEventListener(enrollmentListener);
                         startActivity(new Intent(StudentEnroll.this, NavActivity.class));
                         finish();
                     }
@@ -217,6 +223,8 @@ public class StudentEnroll extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        database.removeEventListener(subjectsListener);
+        database.removeEventListener(enrollmentListener);
         startActivity(new Intent(StudentEnroll.this, NavActivity.class));
         finish();
     }

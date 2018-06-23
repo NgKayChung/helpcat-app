@@ -2,21 +2,16 @@ package com.app.my.firstapplication;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.*;
 
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.WriterException;
+import com.google.zxing.*;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
-public class QRGenerate extends AppCompatActivity {
+public class StudentAttendanceActivity extends AppCompatActivity {
     private Button gen_btn;
     private ImageView image;
     private String text2Qr;
@@ -45,7 +40,6 @@ public class QRGenerate extends AppCompatActivity {
                 {
                     e.printStackTrace();
                 }
-
             }
         });
     }

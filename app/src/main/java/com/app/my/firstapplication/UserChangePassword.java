@@ -24,7 +24,6 @@ public class UserChangePassword extends AppCompatActivity {
     private TextView desc_txt;
 
     private FirebaseDatabase firebase;
-    private DatabaseReference database;
 
     private SharedPreferences pref;
 

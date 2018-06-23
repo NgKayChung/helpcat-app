@@ -20,8 +20,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -81,7 +79,7 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
             button3_img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(NavActivity.this, QRGenerate.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    startActivity(new Intent(NavActivity.this, StudentAttendanceActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 }
             });
 
@@ -111,7 +109,7 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
             button3_img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(NavActivity.this, Scanner.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    startActivity(new Intent(NavActivity.this, LecturerAttendanceActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 }
             });
 
