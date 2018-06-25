@@ -20,6 +20,7 @@ public class LecturerAttendanceActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LecturerAttendanceActivity.this, ScannerActivity.class);
+                intent.putExtra("classObject", "CSC1015");
                 startActivityForResult(intent, IntentIntegrator.REQUEST_CODE);
             }
         });
