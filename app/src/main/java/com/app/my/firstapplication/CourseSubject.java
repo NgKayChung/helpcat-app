@@ -1,10 +1,14 @@
 package com.app.my.firstapplication;
 
+import com.google.firebase.database.PropertyName;
+
+import java.util.ArrayList;
+
 public class CourseSubject extends Object {
     private String subjectCode;
     private String subjectTitle;
 
-    public CourseSubject(){}
+    public CourseSubject() {}
 
     public CourseSubject(String subjectCode, String subjectTitle) {
         this.subjectCode = subjectCode;

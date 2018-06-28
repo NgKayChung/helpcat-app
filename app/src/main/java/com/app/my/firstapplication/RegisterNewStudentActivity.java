@@ -1,5 +1,7 @@
 package com.app.my.firstapplication;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,12 +21,22 @@ public class RegisterNewStudentActivity extends AppCompatActivity {
     private ArrayAdapter<String> genderSpinnerAdapter, nationalitySpinnerAdapter, programmeSpinnerAdapter, intakeMonthSpinnerAdapter, intakeYearSpinnerAdapter;
     private Button registerBtn;
 
+    private Dialog dialog;
+    private View dialogView;
+    private TextView title_txt, desc_txt;
+
     private FirebaseDatabase firebaseDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_new_student);
+
+        dialog = new Dialog(RegisterNewStudentActivity.this);
+        dialogView = getLayoutInflater().inflate(R.layout.box_dialog, null);
+        title_txt = dialogView.findViewById(R.id.dialog_titleTxt);
+        desc_txt = dialogView.findViewById(R.id.dialog_descTxt);
+        dialog.setContentView(dialogView);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
 
@@ -272,6 +284,18 @@ public class RegisterNewStudentActivity extends AppCompatActivity {
 
                 Student new_student = new Student(studentID, studentEmailAddress, studentName, studentPassword, studentNricPassport, studentNationality, studentGender, studentPhoneNumber, studentLivingAddress, studentEnrollProgramme, studentIntake);
                 firebaseDatabase.getReference("users").child(studentID).setValue(new_student);
+
+                title_txt.setText("Success");
+                desc_txt.setText("Student registered successfully");
+                dialog.show();
+
+                dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        dialog.dismiss();
+                        onBackPressed();
+                    }
+                });
             }
 
             @Override
@@ -279,5 +303,10 @@ public class RegisterNewStudentActivity extends AppCompatActivity {
                 Log.d("Error", databaseError.getMessage());
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

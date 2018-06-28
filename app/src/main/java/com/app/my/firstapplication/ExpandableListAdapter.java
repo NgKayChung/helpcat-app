@@ -62,7 +62,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         String tituloCategoria = (String) getGroup(groupPosition);
-        convertView = LayoutInflater.from(context).inflate(R.layout.list_group,null);
+        convertView = LayoutInflater.from(context).inflate(R.layout.enroll_approval_list_group,null);
         TextView lblListHeader =(TextView) convertView.findViewById(R.id.studentid_txt);
         lblListHeader.setText(tituloCategoria);
 
@@ -72,7 +72,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         String item = (String) getChild(groupPosition,childPosition);
-        convertView = LayoutInflater.from(context).inflate(R.layout.list_item,null);
+        convertView = LayoutInflater.from(context).inflate(R.layout.enroll_approval_list_item,null);
         TextView lblListItem = convertView.findViewById(R.id.subjectName_txt);
         lblListItem.setText(item);
         return convertView;

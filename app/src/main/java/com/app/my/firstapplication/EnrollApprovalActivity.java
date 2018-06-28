@@ -129,7 +129,7 @@ public class EnrollApprovalActivity extends AppCompatActivity {
         public View getGroupView(final int groupPosition, final boolean isExpanded, View convertView, ViewGroup parent) {
             SubjectEnrollment enrollment = (SubjectEnrollment) getGroup(groupPosition);
 
-            convertView = LayoutInflater.from(context).inflate(R.layout.list_group,null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.enroll_approval_list_group,null);
 
             TextView studentID_textView = (TextView) convertView.findViewById(R.id.studentid_txt);
             studentID_textView.setText(enrollment.getStudentID());
@@ -168,7 +168,7 @@ public class EnrollApprovalActivity extends AppCompatActivity {
         public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
             CourseSubject subject = (CourseSubject) getChild(groupPosition, childPosition);
 
-            convertView = LayoutInflater.from(context).inflate(R.layout.list_item, null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.enroll_approval_list_item, null);
 
             TextView subjectName_textView = (TextView) convertView.findViewById(R.id.subjectName_txt);
             subjectName_textView.setText(subject.toString());

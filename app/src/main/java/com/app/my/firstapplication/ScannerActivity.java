@@ -34,6 +34,8 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
 
+    private String subjectID;
+
     private String currentDate;
     private String subjectIndex;
     private String resultString;
@@ -41,6 +43,9 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Bundle extras = getIntent().getExtras();
+        subjectID = extras.getString("subjectID");
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
@@ -51,18 +56,21 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
             @Override
             public void onDataChange(DataSnapshot usersSnapshot) {
                 for(final DataSnapshot studentSnapshot : usersSnapshot.getChildren()) {
-                    studentSnapshot.child("enrolledSubjects").getRef().orderByChild("subjectCode").equalTo("CSC1015").addListenerForSingleValueEvent(new ValueEventListener() {
+                    studentSnapshot.child("enrolledSubjects").getRef().orderByChild("subjectCode").equalTo(subjectID).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot studEnrolledSnapshot) {
                             if(studEnrolledSnapshot.exists()) {
                                 final Map<String, Object> attendanceMap = new HashMap<>();
                                 attendanceMap.put("studentID", (String)studentSnapshot.child("ID").getValue());
                                 attendanceMap.put("attended", false);
-                                databaseReference.child("subjects").orderByChild("subjectCode").equalTo("CSC1015").addListenerForSingleValueEvent(new ValueEventListener() {
+                                databaseReference.child("subjects").orderByChild("subjectCode").equalTo(subjectID).addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot subjectSnapshot) {
                                         subjectIndex = subjectSnapshot.getChildren().iterator().next().getKey();
-                                        subjectSnapshot.child(subjectIndex).child("attendanceList").child(currentDate).child((String)studentSnapshot.child("ID").getValue()).getRef().setValue(attendanceMap);
+                                        DataSnapshot snap = subjectSnapshot.child(subjectIndex).child("attendanceList").child(currentDate).child((String)studentSnapshot.child("ID").getValue());
+                                        if(!snap.child("attended").getValue(Boolean.class)) {
+                                            snap.getRef().setValue(attendanceMap);
+                                        }
                                     }
 
                                     @Override

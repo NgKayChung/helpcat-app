@@ -24,11 +24,14 @@ public class UserChangePassword extends AppCompatActivity {
     private TextView desc_txt;
 
     private FirebaseDatabase firebase;
+    private DatabaseReference databaseReference;
 
     private SharedPreferences pref;
 
     private String currentPassword;
     private String newPassword;
+
+    private ValueEventListener passwordListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +51,11 @@ public class UserChangePassword extends AppCompatActivity {
         textInputRetypeNewPassword = findViewById(R.id.text_input_retype_new_password);
 
         firebase = FirebaseDatabase.getInstance();
+        databaseReference = firebase.getReference();
 
         pref = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
 
-        firebase.getReference("users").child(pref.getString("KEY_ID", null)).child("password").addValueEventListener(new ValueEventListener() {
+        passwordListener = databaseReference.child("users").child(pref.getString("KEY_ID", null)).child("password").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 currentPassword = (String) dataSnapshot.getValue();
@@ -125,5 +129,11 @@ public class UserChangePassword extends AppCompatActivity {
         }
 
         return success;
+    }
+
+    @Override
+    public void onDestroy() {
+        databaseReference.child("users").child(pref.getString("KEY_ID", null)).child("password").removeEventListener(passwordListener);
+        super.onDestroy();
     }
 }

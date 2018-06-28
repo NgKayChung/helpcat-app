@@ -11,4 +11,5 @@
     <string name="password_text">Password</string>
     <string name="event_page">Upcoming Events</string>
     <string name="logout">Logout</string>
+    <string name="title_activity_message">MessageActivity</string>
 </resources>

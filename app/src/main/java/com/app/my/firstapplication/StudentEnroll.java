@@ -1,23 +1,15 @@
 package com.app.my.firstapplication;
 
 import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
+import android.content.*;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.TextView;
+import android.widget.*;
 
 import java.util.ArrayList;
 
 import android.content.SharedPreferences;
-import android.widget.Toast;
 
 import com.google.firebase.database.*;
 
@@ -38,15 +30,13 @@ public class StudentEnroll extends AppCompatActivity {
     private SharedPreferences preferences;
 
     private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference database;
+    private DatabaseReference database_subject, database_approval;
 
     private SubjectEnrollment enrollment;
 
     private ArrayList<CourseSubject> allsubjects;
 
-    private Student currentStudent;
-
-    private ValueEventListener subjectsListener, enrollmentExistListener, enrollmentListener;
+    private ValueEventListener subjectsListener, enrollmentListener;
 
     private static final GenericTypeIndicator<ArrayList<CourseSubject>> genericTypeIndicator = new GenericTypeIndicator<ArrayList<CourseSubject>>(){};
 
@@ -63,7 +53,8 @@ public class StudentEnroll extends AppCompatActivity {
         dialog = dBuilder.create();
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        database = firebaseDatabase.getReference();
+        database_subject = firebaseDatabase.getReference("subjects");
+        database_approval = firebaseDatabase.getReference("add_sub_approval");
         preferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
 
         setContentView(R.layout.activity_student_enroll);
@@ -78,7 +69,7 @@ public class StudentEnroll extends AppCompatActivity {
         enrolledList = new ArrayList<CourseSubject>();
 
         subject_listView = (ListView) findViewById(R.id.sbjList);
-        enrolledListAdapter = new CustomListWithButtonAdapter(enrolledList, R.layout.custom_list_item, StudentEnroll.this, new CustomClickListener() {
+        enrolledListAdapter = new CustomListWithButtonAdapter(enrolledList, R.layout.added_list_item, StudentEnroll.this, new CustomClickListener() {
             @Override
             public void onClick(int position) {
                 enrollment.removeSubject(enrolledList.get(position));
@@ -93,7 +84,7 @@ public class StudentEnroll extends AppCompatActivity {
         });
         subject_listView.setAdapter(enrolledListAdapter);
 
-        subjectsListener = database.child("subjects").addValueEventListener(new ValueEventListener() {
+        subjectsListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 allsubjects = dataSnapshot.getValue(genericTypeIndicator);
@@ -108,75 +99,66 @@ public class StudentEnroll extends AppCompatActivity {
                 desc_txt.setText("Connection error");
                 dialog.show();
             }
-        });
+        };
+
+        database_subject.addValueEventListener(subjectsListener);
 
         enrollment = new SubjectEnrollment();
         enrollment.setStudentID(preferences.getString("KEY_ID", null));
 
-        database.child("add_sub_approval").child(preferences.getString("KEY_ID", null)).addListenerForSingleValueEvent(new ValueEventListener() {
+        enrollmentListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.getChildrenCount() <= 0) {
-                    DatabaseReference dref = firebaseDatabase.getReference("add_sub_approval").child(preferences.getString("KEY_ID", null));
-                    dref.setValue(enrollment);
+                if(dataSnapshot.exists()) {
+                    enrollment = dataSnapshot.getValue(SubjectEnrollment.class);
+                } else {
+                    database_approval.child(preferences.getString("KEY_ID", null)).setValue(enrollment);
                 }
 
-                enrollmentListener = database.child("add_sub_approval").child(preferences.getString("KEY_ID", null)).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        enrollment = dataSnapshot.getValue(SubjectEnrollment.class);
+                if(enrollment.getStatus() == 200) {
+                    spinner.setEnabled(false);
+                    spinner.setClickable(false);
 
-                        if(enrollment.getStatus() == 200) {
-                            spinner.setEnabled(false);
-                            spinner.setClickable(false);
+                    addSubject_btn.setEnabled(false);
+                    addSubject_btn.setClickable(false);
 
-                            addSubject_btn.setEnabled(false);
-                            addSubject_btn.setClickable(false);
+                    submit_btn.setEnabled(false);
+                    submit_btn.setClickable(false);
 
-                            submit_btn.setEnabled(false);
-                            submit_btn.setClickable(false);
+                    enrolledListAdapter = new CustomListAdapter(enrolledList, R.layout.simple_list_item, StudentEnroll.this);
+                    subject_listView.setAdapter(enrolledListAdapter);
+                } else if(enrollment.getStatus() == 400) {
+                    //display remarks
+                    enrollment.setSubmitted(false);
+                    enrollment.setStatus(100);
+                    enrollment.setRemarks("");
+                    database_approval.child(preferences.getString("KEY_ID", null)).setValue(enrollment);
+                } else if(enrollment.numberOfSubject() >= 5) {
+                    spinner.setEnabled(false);
+                }
 
-                            enrolledListAdapter = new CustomListAdapter(enrolledList, R.layout.simple_list_item, StudentEnroll.this);
-                            subject_listView.setAdapter(enrolledListAdapter);
-                        } else if(enrollment.getStatus() == 400) {
-                            //display remarks
-                            enrollment.setSubmitted(false);
-                            enrollment.setStatus(100);
-                            enrollment.setRemarks("");
-                            firebaseDatabase.getReference("add_sub_approval").child(preferences.getString("KEY_ID", null)).setValue(enrollment);
-                        } else if(enrollment.numberOfSubject() >= 5) {
-                            spinner.setEnabled(false);
-                        }
+                enrolledList.clear();
+                enrolledList.addAll(enrollment.getSubjectList());
 
-                        enrolledList.clear();
-                        enrolledList.addAll(enrollment.getSubjectList());
-
-                        subjectList.clear();
-                        subjectList.add(new CourseSubject("Select", ""));
-                        if (allsubjects != null) {
-                            subjectList.addAll(allsubjects);
-                            subjectList.removeAll(enrolledList);
-                        }
-                        spinnerAdapter.notifyDataSetChanged();
-                        enrolledListAdapter.notifyDataSetChanged();
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        dTitle.setText("Error");
-                        desc_txt.setText("Connection error");
-                        dialog.show();
-                    }
-                });
+                subjectList.clear();
+                subjectList.add(new CourseSubject("Select", ""));
+                if (allsubjects != null) {
+                    subjectList.addAll(allsubjects);
+                    subjectList.removeAll(enrolledList);
+                }
+                spinnerAdapter.notifyDataSetChanged();
+                enrolledListAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 dTitle.setText("Error");
-                desc_txt.setText("Error : " + databaseError.getMessage());
+                desc_txt.setText("Connection error");
                 dialog.show();
             }
-        });
+        };
+
+        database_approval.child(preferences.getString("KEY_ID", null)).addValueEventListener(enrollmentListener);
 
         addSubject_btn = (Button) findViewById(R.id.addBtn);
         addSubject_btn.setOnClickListener(new View.OnClickListener() {
@@ -211,8 +193,6 @@ public class StudentEnroll extends AppCompatActivity {
                 dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialog) {
-                        database.removeEventListener(subjectsListener);
-                        database.removeEventListener(enrollmentListener);
                         startActivity(new Intent(StudentEnroll.this, NavActivity.class));
                         finish();
                     }
@@ -223,14 +203,13 @@ public class StudentEnroll extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        database.removeEventListener(subjectsListener);
-        database.removeEventListener(enrollmentListener);
-        startActivity(new Intent(StudentEnroll.this, NavActivity.class));
-        finish();
+        super.onBackPressed();
     }
 
     @Override
     public void onDestroy() {
+        database_subject.removeEventListener(subjectsListener);
+        database_approval.child(preferences.getString("KEY_ID", null)).removeEventListener(enrollmentListener);
         super.onDestroy();
     }
 }

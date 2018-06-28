@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -32,8 +34,10 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
 
     private boolean isBackPressed = false;
 
-    private ImageView button1_img, button2_img, button3_img, button4_img;
-    private TextView button1_txt, button2_txt, button3_txt, button4_txt;
+    private ImageView button1_img, button2_img, button3_img;
+    private TextView button1_txt, button2_txt, button3_txt;
+
+    private FloatingActionButton fab;
 
     private SharedPreferences pref;
 
@@ -50,8 +54,6 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
         button2_txt = (TextView) findViewById(R.id.button2_text);
         button3_img = (ImageView) findViewById(R.id.button3_img);
         button3_txt = (TextView) findViewById(R.id.button3_text);
-        button4_img = (ImageView) findViewById(R.id.button4_img);
-        button4_txt = (TextView) findViewById(R.id.button4_text);
 
         pref = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
         final String userType = pref.getString("KEY_TYPE", "student");
@@ -59,7 +61,7 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
         if(userType.equals("student")) {
             button1_img.setImageResource(R.drawable.ic_school_black_24dp);
             button1_img.setBackground(getDrawable(R.drawable.buttonbackground));
-            button1_txt.setText("CLASSES");
+            button1_txt.setText("SUBJECT ENROLL");
 
             button1_img.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -68,29 +70,34 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
                 }
             });
 
-            button2_img.setImageResource(R.drawable.ic_event_note_black_24dp);
+            button2_img.setImageResource(R.drawable.ic_event_available_black_24dp);
             button2_img.setBackground(getDrawable(R.drawable.buttonbackground));
             button2_txt.setText("ATTENDANCE");
 
-            button3_img.setImageResource(R.drawable.ic_event_available_black_24dp);
-            button3_img.setBackground(getDrawable(R.drawable.buttonbackground));
-            button3_txt.setText("ATTENDANCE");
-
-            button3_img.setOnClickListener(new View.OnClickListener() {
+            button2_img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     startActivity(new Intent(NavActivity.this, StudentAttendanceActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 }
             });
 
-            button4_img.setImageResource(R.drawable.ic_menu_manage);
-            button4_img.setBackground(getDrawable(R.drawable.buttonbackground));
-            button4_txt.setText("CHANGE PASSWORD");
+            button3_img.setImageResource(R.drawable.ic_menu_manage);
+            button3_img.setBackground(getDrawable(R.drawable.buttonbackground));
+            button3_txt.setText("CHANGE PASSWORD");
 
-            button4_img.setOnClickListener(new View.OnClickListener() {
+            button3_img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     startActivity(new Intent(NavActivity.this, UserChangePassword.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                }
+            });
+
+            fab = (FloatingActionButton) findViewById(R.id.fab);
+            fab.setVisibility(View.VISIBLE);
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(NavActivity.this, MessageActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 }
             });
         } else if(userType.equals("lecturer")) {
@@ -98,26 +105,22 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
             button1_img.setBackground(getDrawable(R.drawable.buttonbackground));
             button1_txt.setText("CLASSES");
 
-            button2_img.setImageResource(R.drawable.ic_event_note_black_24dp);
+            button2_img.setImageResource(R.drawable.ic_menu_camera);
             button2_img.setBackground(getDrawable(R.drawable.buttonbackground));
             button2_txt.setText("ATTENDANCE");
 
-            button3_img.setImageResource(R.drawable.ic_menu_camera);
-            button3_img.setBackground(getDrawable(R.drawable.buttonbackground));
-            button3_txt.setText("ATTENDANCE");
-
-            button3_img.setOnClickListener(new View.OnClickListener() {
+            button2_img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     startActivity(new Intent(NavActivity.this, LecturerAttendanceActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 }
             });
 
-            button4_img.setImageResource(R.drawable.ic_menu_manage);
-            button4_img.setBackground(getDrawable(R.drawable.buttonbackground));
-            button4_txt.setText("CHANGE PASSWORD");
+            button3_img.setImageResource(R.drawable.ic_menu_manage);
+            button3_img.setBackground(getDrawable(R.drawable.buttonbackground));
+            button3_txt.setText("CHANGE PASSWORD");
 
-            button4_img.setOnClickListener(new View.OnClickListener() {
+            button3_img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     startActivity(new Intent(NavActivity.this, UserChangePassword.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
@@ -213,7 +216,7 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
         View sidebar_view = navigationView.getHeaderView(0);
 
         final TextView name_textView = (TextView) sidebar_view.findViewById(R.id.name_textView);
-        name_textView.setText(pref.getString("KEY_NAME", "Name"));
+        name_textView.setText(pref.getString("KEY_NAME", "Name") + " (" + pref.getString("KEY_ID", "ID") + ")");
 
         final TextView email_textView = (TextView) sidebar_view.findViewById(R.id.email_textView);
         email_textView.setText(pref.getString("KEY_EMAIL", "Email Address"));
@@ -280,7 +283,7 @@ public class NavActivity extends AppCompatActivity implements NavigationView.OnN
             SharedPreferences.Editor editor = currentPrefs.edit();
             editor.clear();
             editor.apply();
-            //Toast.makeText(this, "Logout successfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Logout successfully", Toast.LENGTH_SHORT).show();
             startActivity(intent);
         }
 

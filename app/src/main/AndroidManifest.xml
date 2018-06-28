@@ -39,6 +39,10 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".MessageActivity"
+            android:label="My Message"
+            android:parentActivityName=".NavActivity" />
+        <activity
             android:name=".MainEvent"
             android:label="@string/event_page"
             android:parentActivityName=".NavActivity" />
@@ -46,6 +50,10 @@
             android:name=".LecturerAttendanceActivity"
             android:label="Class Attendance"
             android:parentActivityName=".NavActivity" />
+        <activity
+            android:name=".ScannerActivity"
+            android:label="Scan"
+            android:parentActivityName=".LecturerAttendanceActivity" />
         <activity
             android:name=".StudentEnroll"
             android:label="Enroll Subject"
@@ -63,6 +71,9 @@
             android:label="Attend to Class"
             android:parentActivityName=".NavActivity" />
         <activity
+            android:name=".QRGenerate"
+            android:label="My Code"/>
+        <activity
             android:name=".ForgotPasswordActivity"
             android:label="Forgot Password"
             android:parentActivityName=".MainActivity" />
@@ -74,10 +85,6 @@
             android:name=".RegisterNewStudentActivity"
             android:label="Register New Student"
             android:parentActivityName=".NavActivity" />
-        <activity
-            android:name=".ScannerActivity"
-            android:label="Scan"
-            android:parentActivityName=".LecturerAttendanceActivity" />
     </application>
 
 </manifest>
