@@ -106,6 +106,8 @@ public class MainActivity extends AppCompatActivity {
                                     dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                                         @Override
                                         public void onDismiss(DialogInterface dialog) {
+                                            dialog.dismiss();
+                                            dialog.cancel();
                                             startActivity(new Intent(MainActivity.this, NavActivity.class));
                                         }
                                     });

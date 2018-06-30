@@ -4,7 +4,10 @@ import android.app.AlertDialog;
 import android.content.*;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.*;
 
 import java.util.ArrayList;
@@ -84,7 +87,7 @@ public class StudentEnroll extends AppCompatActivity {
         });
         subject_listView.setAdapter(enrolledListAdapter);
 
-        subjectsListener = new ValueEventListener() {
+        subjectsListener = database_subject.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 allsubjects = dataSnapshot.getValue(genericTypeIndicator);
@@ -99,14 +102,12 @@ public class StudentEnroll extends AppCompatActivity {
                 desc_txt.setText("Connection error");
                 dialog.show();
             }
-        };
-
-        database_subject.addValueEventListener(subjectsListener);
+        });
 
         enrollment = new SubjectEnrollment();
         enrollment.setStudentID(preferences.getString("KEY_ID", null));
 
-        enrollmentListener = new ValueEventListener() {
+        enrollmentListener = database_approval.child(preferences.getString("KEY_ID", null)).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()) {
@@ -156,9 +157,7 @@ public class StudentEnroll extends AppCompatActivity {
                 desc_txt.setText("Connection error");
                 dialog.show();
             }
-        };
-
-        database_approval.child(preferences.getString("KEY_ID", null)).addValueEventListener(enrollmentListener);
+        });
 
         addSubject_btn = (Button) findViewById(R.id.addBtn);
         addSubject_btn.setOnClickListener(new View.OnClickListener() {

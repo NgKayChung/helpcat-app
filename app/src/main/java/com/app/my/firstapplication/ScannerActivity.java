@@ -63,12 +63,17 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
                                 final Map<String, Object> attendanceMap = new HashMap<>();
                                 attendanceMap.put("studentID", (String)studentSnapshot.child("ID").getValue());
                                 attendanceMap.put("attended", false);
+
                                 databaseReference.child("subjects").orderByChild("subjectCode").equalTo(subjectID).addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot subjectSnapshot) {
                                         subjectIndex = subjectSnapshot.getChildren().iterator().next().getKey();
                                         DataSnapshot snap = subjectSnapshot.child(subjectIndex).child("attendanceList").child(currentDate).child((String)studentSnapshot.child("ID").getValue());
-                                        if(!snap.child("attended").getValue(Boolean.class)) {
+                                        if(snap.exists()) {
+                                            if (!snap.child("attended").getValue(Boolean.class)) {
+                                                snap.getRef().setValue(attendanceMap);
+                                            }
+                                        } else {
                                             snap.getRef().setValue(attendanceMap);
                                         }
                                     }

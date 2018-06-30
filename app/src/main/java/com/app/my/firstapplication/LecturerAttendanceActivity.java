@@ -70,7 +70,7 @@ public class LecturerAttendanceActivity extends AppCompatActivity {
         databaseReference.child("subjects").orderByChild("lecturerID").equalTo(preferences.getString("KEY_ID", null)).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot subjectListSnapshot) {
-                String dayOfTheWeek = Calendar.getInstance().getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.UK);
+                String dayOfTheWeek = Calendar.getInstance().getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.ENGLISH);
                 long countDownMilli = 0;
 
                 for(DataSnapshot subjectSnapshot : subjectListSnapshot.getChildren()) {
@@ -91,19 +91,26 @@ public class LecturerAttendanceActivity extends AppCompatActivity {
                                 startTime.setTimeInMillis(startParse.getTime());
                                 startTime.set(currentTime.get(Calendar.YEAR), currentTime.get(Calendar.MONTH), currentTime.get(Calendar.DAY_OF_MONTH));
 
-                                if(startTime.before(currentTime)) {
+                                if(currentTime.after(startTime)) {
                                     Date endParse = sdf.parse(subjectClass.getEndTime());
                                     endTime.setTimeInMillis(endParse.getTime());
                                     endTime.set(currentTime.get(Calendar.YEAR), currentTime.get(Calendar.MONTH), currentTime.get(Calendar.DAY_OF_MONTH));
 
-                                    if(endTime.after(currentTime)) {
+                                    if(currentTime.before(endTime)) {
                                         currentClass = subject;
                                         isClassStarted = true;
                                     }
-                                } else {
-                                    if(currentClass == null) {
+                                } else if(currentTime.before(startTime)) {
+                                    Long tempCountDownMilli = startTime.getTimeInMillis() - Calendar.getInstance(Locale.ENGLISH).getTimeInMillis();
+
+                                    if (currentClass == null) {
                                         currentClass = subject;
-                                        countDownMilli = startTime.getTimeInMillis() - Calendar.getInstance(Locale.ENGLISH).getTimeInMillis();
+                                        countDownMilli = tempCountDownMilli;
+                                    } else {
+                                        if (tempCountDownMilli < countDownMilli) {
+                                            currentClass = subject;
+                                            countDownMilli = tempCountDownMilli;
+                                        }
                                     }
                                 }
                             } catch (ParseException e) {
@@ -237,5 +244,5 @@ public class LecturerAttendanceActivity extends AppCompatActivity {
     }
 }
 /*
-[{"day":"Tuesday", "endTime":"5.30pm", "startTime":"2.30pm", "venue":"513"}, {"day":"Friday", "endTime":"4.00pm", "startTime":"2.00pm", "venue":"521"}]
+[{"day":"Wednesday", "endTime":"5.00pm", "startTime":"2.00pm", "venue":"517"}, {"day":"Thursday", "endTime":"11.00am", "startTime":"9.00am", "venue":"516"}]
 */

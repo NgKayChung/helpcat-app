@@ -10,7 +10,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="8dp"
         android:paddingStart="?android:attr/expandableListPreferredChildPaddingLeft"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="16sp" />
@@ -21,6 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@id/class_dateTime_txt"
+        android:layout_marginBottom="2dp"
         android:layout_marginTop="4dp"
         android:paddingStart="?android:attr/expandableListPreferredChildPaddingLeft"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />

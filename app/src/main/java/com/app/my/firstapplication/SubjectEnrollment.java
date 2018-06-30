@@ -9,7 +9,7 @@ public class SubjectEnrollment extends Object {
     private int status;
     private String remarks;
 
-    public SubjectEnrollment(){
+    public SubjectEnrollment() {
         subjectList = new ArrayList<CourseSubject>();
         status = 100;
         submitted = false;
