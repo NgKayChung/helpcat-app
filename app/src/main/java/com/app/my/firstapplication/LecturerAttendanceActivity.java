@@ -243,6 +243,3 @@ public class LecturerAttendanceActivity extends AppCompatActivity {
         }
     }
 }
-/*
-[{"day":"Wednesday", "endTime":"5.00pm", "startTime":"2.00pm", "venue":"517"}, {"day":"Thursday", "endTime":"11.00am", "startTime":"9.00am", "venue":"516"}]
-*/

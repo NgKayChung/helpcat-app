@@ -47,6 +47,10 @@
             android:label="@string/event_page"
             android:parentActivityName=".NavActivity" />
         <activity
+            android:name=".LecturerMessageActivity"
+            android:label="Sends Message"
+            android:parentActivityName=".NavActivity"/>
+        <activity
             android:name=".LecturerAttendanceActivity"
             android:label="Class Attendance"
             android:parentActivityName=".NavActivity" />
@@ -72,7 +76,7 @@
             android:parentActivityName=".NavActivity" />
         <activity
             android:name=".QRGenerate"
-            android:label="My Code"/>
+            android:label="My Code" />
         <activity
             android:name=".ForgotPasswordActivity"
             android:label="Forgot Password"
@@ -85,6 +89,7 @@
             android:name=".RegisterNewStudentActivity"
             android:label="Register New Student"
             android:parentActivityName=".NavActivity" />
+
     </application>
 
 </manifest>

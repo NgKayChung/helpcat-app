@@ -13,7 +13,7 @@ public class ViewPagerAdapter extends PagerAdapter {
 
     private Context context;
     private LayoutInflater layoutInflater;
-    private Integer [] images = {R.drawable.slide1,R.drawable.slide2,R.drawable.slide3};
+    private Integer [] images = {R.drawable.slide1, R.drawable.slide2, R.drawable.slide3};
 
     public ViewPagerAdapter(Context context) {
         this.context = context;
@@ -39,15 +39,7 @@ public class ViewPagerAdapter extends PagerAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(position == 0){
-                    Toast.makeText(context, "Slide 1 Clicked", Toast.LENGTH_SHORT).show();
-                } else if(position == 1){
-                    Toast.makeText(context, "Slide 2 Clicked", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(context, "Slide 3 Clicked", Toast.LENGTH_SHORT).show();
-                }
-
+                Toast.makeText(context, "Register to Join Us !", Toast.LENGTH_SHORT).show();
             }
         });
 

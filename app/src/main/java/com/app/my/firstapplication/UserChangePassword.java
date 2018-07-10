@@ -112,6 +112,9 @@ public class UserChangePassword extends AppCompatActivity {
         if (newPassword.isEmpty()) {
             textInputNewPassword.setError("Field cannot be empty");
             success = false;
+        } else if(newPassword.length() < 8) {
+            textInputNewPassword.setError("Password should consists of 8 characters");
+            success = false;
         } else {
             textInputNewPassword.setError("");
         }
