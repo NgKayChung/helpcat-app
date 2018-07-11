@@ -10,7 +10,7 @@ import com.google.zxing.*;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
-public class QRGenerate extends AppCompatActivity {
+public class QRGenerateActivity extends AppCompatActivity {
     private ImageView qr_imageView;
 
     private String studentIDText;

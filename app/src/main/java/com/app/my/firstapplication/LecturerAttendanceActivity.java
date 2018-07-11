@@ -6,14 +6,10 @@ import android.content.SharedPreferences;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.*;
 
 import com.google.firebase.database.*;
-import com.google.zxing.integration.android.IntentIntegrator;
 
 import java.text.*;
 import java.util.*;
@@ -67,7 +63,7 @@ public class LecturerAttendanceActivity extends AppCompatActivity {
         startClassName_textView = (TextView) findViewById(R.id.startClassName_txt);
         startClass_textView = (TextView) findViewById(R.id.startClass_txt);
 
-        databaseReference.child("subjects").orderByChild("lecturerID").equalTo(preferences.getString("KEY_ID", null)).addValueEventListener(new ValueEventListener() {
+        databaseReference.child("subjects").orderByChild("lecturerID").equalTo(preferences.getString("KEY_ID", null)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot subjectListSnapshot) {
                 String dayOfTheWeek = Calendar.getInstance().getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.ENGLISH);

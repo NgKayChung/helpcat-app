@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.app.my.firstapplication">
 
     <uses-sdk
@@ -18,13 +19,12 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/helpcat_app_launcher_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
+        android:supportsRtl="false"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".HomeActivity"
+            android:name=".TopActivity"
             android:label="@string/app_name"
             android:theme="@style/NoTitle">
             <intent-filter>
@@ -33,62 +33,58 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".LoginActivity" />
         <activity
-            android:name=".NavActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MessageActivity"
             android:label="My Message"
-            android:parentActivityName=".NavActivity" />
-        <activity
-            android:name=".MainEvent"
-            android:label="@string/event_page"
-            android:parentActivityName=".NavActivity" />
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".LecturerMessageActivity"
             android:label="Sends Message"
-            android:parentActivityName=".NavActivity"/>
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".LecturerAttendanceActivity"
             android:label="Class Attendance"
-            android:parentActivityName=".NavActivity" />
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".ScannerActivity"
             android:label="Scan"
             android:parentActivityName=".LecturerAttendanceActivity" />
         <activity
-            android:name=".StudentEnroll"
+            android:name=".StudentEnrollActivity"
             android:label="Enroll Subject"
-            android:parentActivityName=".NavActivity" />
+            android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".UserChangePassword"
+            android:name=".UserChangePasswordActivity"
             android:label="Change Password"
-            android:parentActivityName=".NavActivity" />
+            android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".AdminChangePass"
+            android:name=".AdminChangePasswordActivity"
             android:label="Reset User Password"
-            android:parentActivityName=".NavActivity" />
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".StudentAttendanceActivity"
             android:label="Attend to Class"
-            android:parentActivityName=".NavActivity" />
+            android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".QRGenerate"
+            android:name=".QRGenerateActivity"
             android:label="My Code" />
         <activity
             android:name=".ForgotPasswordActivity"
             android:label="Forgot Password"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".LoginActivity" />
         <activity
             android:name=".EnrollApprovalActivity"
             android:label="Subject Enrollment Approval"
-            android:parentActivityName=".NavActivity" />
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".RegisterNewStudentActivity"
             android:label="Register New Student"
-            android:parentActivityName=".NavActivity" />
+            android:parentActivityName=".MainActivity" />
 
     </application>
 

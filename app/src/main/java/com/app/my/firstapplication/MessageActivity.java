@@ -67,7 +67,7 @@ public class MessageActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(DataSnapshot messageListSnapshot) {
                             messageList.clear();
-                            
+
                             for(DataSnapshot messageSnapshot : messageListSnapshot.getChildren()) {
                                 Message currentMessage = messageSnapshot.getValue(Message.class);
 
@@ -106,7 +106,7 @@ public class MessageActivity extends AppCompatActivity {
 
     @Override
     public void onDestroy() {
-        databaseReference.child("message").removeEventListener(messageEventListener);
+        if(messageEventListener != null) databaseReference.child("message").removeEventListener(messageEventListener);
         super.onDestroy();
     }
 

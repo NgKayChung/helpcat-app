@@ -72,7 +72,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                                 public void onDismiss(DialogInterface dialog) {
                                     dialog.dismiss();
                                     dialog.cancel();
-                                    startActivity(new Intent(ForgotPasswordActivity.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                                    startActivity(new Intent(ForgotPasswordActivity.this, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                                     finish();
                                 }
                             });

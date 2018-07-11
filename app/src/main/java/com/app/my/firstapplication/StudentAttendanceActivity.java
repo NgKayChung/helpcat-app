@@ -92,7 +92,7 @@ public class StudentAttendanceActivity extends AppCompatActivity {
         attendClass_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(StudentAttendanceActivity.this, QRGenerate.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                startActivity(new Intent(StudentAttendanceActivity.this, QRGenerateActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
     }

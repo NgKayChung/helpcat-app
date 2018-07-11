@@ -285,17 +285,8 @@ public class RegisterNewStudentActivity extends AppCompatActivity {
                 Student new_student = new Student(studentID, studentEmailAddress, studentName, studentPassword, studentNricPassport, studentNationality, studentGender, studentPhoneNumber, studentLivingAddress, studentEnrollProgramme, studentIntake);
                 firebaseDatabase.getReference("users").child(studentID).setValue(new_student);
 
-                title_txt.setText("Success");
-                desc_txt.setText("Student registered successfully");
-                dialog.show();
-
-                dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialog) {
-                        dialog.dismiss();
-                        onBackPressed();
-                    }
-                });
+                Toast.makeText(getApplicationContext(), "Student registered successfully", Toast.LENGTH_SHORT).show();
+                onBackPressed();
             }
 
             @Override

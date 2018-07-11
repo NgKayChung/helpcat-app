@@ -15,6 +15,13 @@ public class Message extends Object {
         this.subject = new CourseSubject(subjectCode, subjectTitle);
     }
 
+    public Message(String content, long postTimeMillis, Lecturer lecturer, CourseSubject subject) {
+        this.content = content;
+        this.postTimeMillis = postTimeMillis;
+        this.lecturer = lecturer;
+        this.subject = subject;
+    }
+
     public String getContent() {
         return content;
     }

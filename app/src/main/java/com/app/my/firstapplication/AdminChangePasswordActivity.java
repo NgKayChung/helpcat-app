@@ -10,7 +10,7 @@ import com.google.firebase.database.*;
 
 import java.util.ArrayList;
 
-public class AdminChangePass extends AppCompatActivity {
+public class AdminChangePasswordActivity extends AppCompatActivity {
     private ListView changePasswordListView;
 
     private ArrayAdapter<ResetPasswordSubmission> resetListAdapter;
@@ -22,13 +22,13 @@ public class AdminChangePass extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_change_pass);
+        setContentView(R.layout.activity_admin_change_password);
 
         changePasswordListView = (ListView) findViewById(R.id.resetPassList);
 
         firebase = FirebaseDatabase.getInstance();
 
-        resetListAdapter = new CustomResetList(this, R.layout.pas_list_row, resetList, new CustomClickListener() {
+        resetListAdapter = new CustomResetList(this, R.layout.reset_password_list_item, resetList, new CustomClickListener() {
             @Override
             public void onClick(int position) {
                 String loginID = resetList.get(position).getID();

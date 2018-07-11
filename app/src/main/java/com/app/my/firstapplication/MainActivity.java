@@ -24,12 +24,11 @@ import android.widget.Toast;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private ViewPager viewPager;
     private LinearLayout sliderDotspanel;
     private int dotscount;
     private ImageView[] dots;
-    private ImageView eventImg;
 
     private boolean isBackPressed = false;
 
@@ -43,7 +42,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -65,7 +64,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             button1_img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(HomeActivity.this, StudentEnrollActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    startActivity(new Intent(MainActivity.this, StudentEnrollActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 }
             });
 
@@ -76,7 +75,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             button2_img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(HomeActivity.this, StudentAttendanceActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    startActivity(new Intent(MainActivity.this, StudentAttendanceActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 }
             });
 
@@ -87,7 +86,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             button3_img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(HomeActivity.this, UserChangePasswordActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    startActivity(new Intent(MainActivity.this, UserChangePasswordActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 }
             });
 
@@ -96,7 +95,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(new Intent(HomeActivity.this, MessageActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    startActivity(new Intent(MainActivity.this, MessageActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 }
             });
         } else if(userType.equals("lecturer")) {
@@ -107,7 +106,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             button1_img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(HomeActivity.this, LecturerMessageActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    startActivity(new Intent(MainActivity.this, LecturerMessageActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 }
             });
 
@@ -118,7 +117,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             button2_img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(HomeActivity.this, LecturerAttendanceActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    startActivity(new Intent(MainActivity.this, LecturerAttendanceActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 }
             });
 
@@ -129,7 +128,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             button3_img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(HomeActivity.this, UserChangePasswordActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    startActivity(new Intent(MainActivity.this, UserChangePasswordActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 }
             });
         } else {
@@ -140,7 +139,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             button1_img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(HomeActivity.this, EnrollApprovalActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    startActivity(new Intent(MainActivity.this, EnrollApprovalActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 }
             });
 
@@ -151,7 +150,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             button2_img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(HomeActivity.this, AdminChangePasswordActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    startActivity(new Intent(MainActivity.this, AdminChangePasswordActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 }
             });
 
@@ -162,7 +161,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             button3_img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(HomeActivity.this, RegisterNewStudentActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    startActivity(new Intent(MainActivity.this, RegisterNewStudentActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 }
             });
         }
@@ -233,7 +232,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         @Override
         public void run()
         {
-            HomeActivity.this.runOnUiThread(new Runnable() {
+            MainActivity.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run()
                 {

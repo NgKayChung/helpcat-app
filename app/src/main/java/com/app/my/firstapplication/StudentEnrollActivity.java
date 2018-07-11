@@ -4,10 +4,7 @@ import android.app.AlertDialog;
 import android.content.*;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.*;
 
 import java.util.ArrayList;
@@ -16,7 +13,7 @@ import android.content.SharedPreferences;
 
 import com.google.firebase.database.*;
 
-public class StudentEnroll extends AppCompatActivity {
+public class StudentEnrollActivity extends AppCompatActivity {
     private Spinner spinner;
     private Button addSubject_btn, submit_btn;
     private ListView subject_listView;
@@ -46,9 +43,10 @@ public class StudentEnroll extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_student_enroll);
 
         //initialize dialog box components
-        dBuilder = new AlertDialog.Builder(StudentEnroll.this);
+        dBuilder = new AlertDialog.Builder(StudentEnrollActivity.this);
         dView = getLayoutInflater().inflate(R.layout.box_dialog, null);
         dTitle = (TextView) dView.findViewById(R.id.dialog_titleTxt);
         desc_txt = (TextView) dView.findViewById(R.id.dialog_descTxt);
@@ -60,19 +58,17 @@ public class StudentEnroll extends AppCompatActivity {
         database_approval = firebaseDatabase.getReference("add_sub_approval");
         preferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
 
-        setContentView(R.layout.activity_student_enroll);
-
         subjectList = new ArrayList<CourseSubject>();
         subjectList.add(new CourseSubject("Select", ""));
 
         spinner = (Spinner) findViewById(R.id.spinner);
-        spinnerAdapter = new CustomListAdapter(subjectList, R.layout.simple_list_item, StudentEnroll.this);
+        spinnerAdapter = new CustomListAdapter(subjectList, R.layout.simple_list_item, StudentEnrollActivity.this);
         spinner.setAdapter(spinnerAdapter);
 
         enrolledList = new ArrayList<CourseSubject>();
 
         subject_listView = (ListView) findViewById(R.id.sbjList);
-        enrolledListAdapter = new CustomListWithButtonAdapter(enrolledList, R.layout.added_list_item, StudentEnroll.this, new CustomClickListener() {
+        enrolledListAdapter = new CustomListWithButtonAdapter(enrolledList, R.layout.added_list_item, StudentEnrollActivity.this, new CustomClickListener() {
             @Override
             public void onClick(int position) {
                 enrollment.removeSubject(enrolledList.get(position));
@@ -126,7 +122,7 @@ public class StudentEnroll extends AppCompatActivity {
                     submit_btn.setEnabled(false);
                     submit_btn.setClickable(false);
 
-                    enrolledListAdapter = new CustomListAdapter(enrolledList, R.layout.simple_list_item, StudentEnroll.this);
+                    enrolledListAdapter = new CustomListAdapter(enrolledList, R.layout.simple_list_item, StudentEnrollActivity.this);
                     subject_listView.setAdapter(enrolledListAdapter);
                 } else if(enrollment.getStatus() == 400) {
                     //display remarks
@@ -171,7 +167,7 @@ public class StudentEnroll extends AppCompatActivity {
 
                     firebaseDatabase.getReference("add_sub_approval").child(preferences.getString("KEY_ID", null)).child("subjectList").setValue(enrollment.getSubjectList());
                 } else if(enrollment.numberOfSubject() >= 5) {
-                    Toast.makeText(StudentEnroll.this, "Maximum number of subjects enrollment is 5. Please proceed to submit the enrollment.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(StudentEnrollActivity.this, "Maximum number of subjects enrollment is 5. Please proceed to submit the enrollment.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -192,7 +188,7 @@ public class StudentEnroll extends AppCompatActivity {
                 dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialog) {
-                        startActivity(new Intent(StudentEnroll.this, NavActivity.class));
+                        startActivity(new Intent(StudentEnrollActivity.this, MainActivity.class));
                         finish();
                     }
                 });

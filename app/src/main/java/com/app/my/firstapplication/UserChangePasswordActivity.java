@@ -9,7 +9,7 @@ import android.widget.*;
 
 import com.google.firebase.database.*;
 
-public class UserChangePassword extends AppCompatActivity {
+public class UserChangePasswordActivity extends AppCompatActivity {
     private TextInputLayout textInputOldPassword, textInputNewPassword, textInputRetypeNewPassword;
     private Button changePassword_btn;
 

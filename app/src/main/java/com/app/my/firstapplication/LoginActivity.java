@@ -2,7 +2,6 @@ package com.app.my.firstapplication;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.View;
 import android.widget.*;
@@ -12,7 +11,7 @@ import android.os.Bundle;
 
 import com.google.firebase.database.*;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     private TextView id_lbl, pass_lbl;
     private EditText id_txt, pass_txt;
     private Button loginButton;
@@ -32,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         //find view components
         id_lbl = (TextView) findViewById(R.id.idLbl);
@@ -43,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         loginButton = (Button) findViewById(R.id.loginBtn);
 
         //initialize dialog box components
-        dBuilder = new AlertDialog.Builder(MainActivity.this);
+        dBuilder = new AlertDialog.Builder(LoginActivity.this);
         dView = getLayoutInflater().inflate(R.layout.box_dialog, null);
         dTitle = (TextView) dView.findViewById(R.id.dialog_titleTxt);
         desc_txt = (TextView) dView.findViewById(R.id.dialog_descTxt);
@@ -53,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         forgotPassword_txt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, ForgotPasswordActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
 
@@ -92,10 +91,6 @@ public class MainActivity extends AppCompatActivity {
                                 if (login_password.equals(user.getPassword())) {
                                     user.determineUserType();
 
-                                    dTitle.setText("Successful");
-                                    desc_txt.setText(user.toString());
-                                    dialog.show();
-
                                     SharedPreferences.Editor editor = pref.edit();
                                     editor.putString("KEY_ID", user.getID());
                                     editor.putString("KEY_NAME", user.getFullname());
@@ -103,14 +98,8 @@ public class MainActivity extends AppCompatActivity {
                                     editor.putString("KEY_TYPE", user.getUserLoginType());
                                     editor.apply();
 
-                                    dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                                        @Override
-                                        public void onDismiss(DialogInterface dialog) {
-                                            dialog.dismiss();
-                                            dialog.cancel();
-                                            startActivity(new Intent(MainActivity.this, NavActivity.class));
-                                        }
-                                    });
+                                    Toast.makeText(getApplicationContext(), "Logged in successfully!", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                 } else {
                                     dTitle.setText("Error");
                                     desc_txt.setText("Incorrect ID or Password");
