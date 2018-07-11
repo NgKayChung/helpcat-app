@@ -1,27 +1,17 @@
 package com.app.my.firstapplication;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.SharedPreferences;
+import android.content.*;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.view.*;
+import android.widget.*;
 
 import com.google.firebase.database.*;
 
 public class UserChangePassword extends AppCompatActivity {
     private TextInputLayout textInputOldPassword, textInputNewPassword, textInputRetypeNewPassword;
     private Button changePassword_btn;
-
-    private AlertDialog.Builder dBuilder;
-    private AlertDialog dialog;
-    private View dView;
-    private TextView dTitle;
-    private TextView desc_txt;
 
     private FirebaseDatabase firebase;
     private DatabaseReference databaseReference;
@@ -37,14 +27,6 @@ public class UserChangePassword extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_change_password);
-
-        //initialize dialog box components
-        dBuilder = new AlertDialog.Builder(UserChangePassword.this);
-        dView = getLayoutInflater().inflate(R.layout.box_dialog, null);
-        dTitle = (TextView) dView.findViewById(R.id.dialog_titleTxt);
-        desc_txt = (TextView) dView.findViewById(R.id.dialog_descTxt);
-        dBuilder.setView(dView);
-        dialog = dBuilder.create();
 
         textInputOldPassword = findViewById(R.id.text_input_old_password);
         textInputNewPassword = findViewById(R.id.text_input_new_password);
@@ -63,9 +45,7 @@ public class UserChangePassword extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                dTitle.setText("Error");
-                desc_txt.setText("Connection error");
-                dialog.show();
+                System.out.println(databaseError.getMessage());
             }
         });
 
@@ -76,16 +56,7 @@ public class UserChangePassword extends AppCompatActivity {
             public void onClick(View v) {
                 if(validateChangePassword()) {
                     firebase.getReference("users").child(pref.getString("KEY_ID", null)).child("password").setValue(newPassword);
-                    dTitle.setText("Successful");
-                    desc_txt.setText("Password is updated");
-                    dialog.show();
-
-                    dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                        @Override
-                        public void onDismiss(DialogInterface dialog) {
-                            UserChangePassword.super.onBackPressed();
-                        }
-                    });
+                    Toast.makeText(getApplicationContext(), "Password is successfully updated", Toast.LENGTH_SHORT);
                 }
             }
         });

@@ -11,7 +11,7 @@ import com.google.firebase.database.*;
 import java.util.ArrayList;
 
 public class AdminChangePass extends AppCompatActivity {
-    private ListView cpl;
+    private ListView changePasswordListView;
 
     private ArrayAdapter<ResetPasswordSubmission> resetListAdapter;
 
@@ -24,7 +24,7 @@ public class AdminChangePass extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_change_pass);
 
-        cpl = (ListView) findViewById(R.id.resetPassList);
+        changePasswordListView = (ListView) findViewById(R.id.resetPassList);
 
         firebase = FirebaseDatabase.getInstance();
 
@@ -51,7 +51,7 @@ public class AdminChangePass extends AppCompatActivity {
                 firebase.getReference("reset_password_approval").child(loginID).removeValue();
             }
         });
-        cpl.setAdapter(resetListAdapter);
+        changePasswordListView.setAdapter(resetListAdapter);
 
         firebase.getReference("reset_password_approval").addValueEventListener(new ValueEventListener() {
             @Override
