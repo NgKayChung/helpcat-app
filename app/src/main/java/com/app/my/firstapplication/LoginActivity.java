@@ -1,6 +1,5 @@
 package com.app.my.firstapplication;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -12,16 +11,10 @@ import android.os.Bundle;
 import com.google.firebase.database.*;
 
 public class LoginActivity extends AppCompatActivity {
-    private TextView id_lbl, pass_lbl;
+    private TextView id_lbl, idErr_txt, pass_lbl, passErr_txt;
     private EditText id_txt, pass_txt;
     private Button loginButton;
     private TextView forgotPassword_txt;
-
-    private AlertDialog.Builder dBuilder;
-    private AlertDialog dialog;
-    private View dView;
-    private TextView dTitle;
-    private TextView desc_txt;
 
     private FirebaseDatabase firebase;
     private DatabaseReference database;
@@ -35,19 +28,13 @@ public class LoginActivity extends AppCompatActivity {
 
         //find view components
         id_lbl = (TextView) findViewById(R.id.idLbl);
+        idErr_txt = (TextView) findViewById(R.id.idErrTxt);
         pass_lbl = (TextView) findViewById(R.id.passLbl);
+        passErr_txt = (TextView) findViewById(R.id.passwordErrTxt);
         id_txt = (EditText) findViewById(R.id.idTxt);
         pass_txt = (EditText) findViewById(R.id.passTxt);
         forgotPassword_txt = (TextView) findViewById(R.id.forgotText);
         loginButton = (Button) findViewById(R.id.loginBtn);
-
-        //initialize dialog box components
-        dBuilder = new AlertDialog.Builder(LoginActivity.this);
-        dView = getLayoutInflater().inflate(R.layout.box_dialog, null);
-        dTitle = (TextView) dView.findViewById(R.id.dialog_titleTxt);
-        desc_txt = (TextView) dView.findViewById(R.id.dialog_descTxt);
-        dBuilder.setView(dView);
-        dialog = dBuilder.create();
 
         forgotPassword_txt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,25 +54,23 @@ public class LoginActivity extends AppCompatActivity {
                 final String login_id = id_txt.getText().toString();
                 final String login_password = pass_txt.getText().toString();
 
+                idErr_txt.setText("");
+                passErr_txt.setText("");
+
                 if (login_id.equals("") && login_password.equals("")) {
-                    dTitle.setText("Error");
-                    desc_txt.setText("Please insert your login ID and Password");
-                    dialog.show();
+                    idErr_txt.setText("Login ID is required");
+                    passErr_txt.setText("Password is required");
                 } else if (login_id.equals("")) {
-                    dTitle.setText("Error");
-                    desc_txt.setText("Please insert your login ID");
-                    dialog.show();
+                    idErr_txt.setText("Login ID is required");
                 } else if (login_password.equals("")) {
-                    dTitle.setText("Error");
-                    desc_txt.setText("Please insert your Password");
-                    dialog.show();
+                    passErr_txt.setText("Password is required");
                 } else {
                     database = firebase.getReference("users");
 
-                    database.child(login_id).addValueEventListener(new ValueEventListener() {
+                    database.child(login_id).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            try {
+                            if(dataSnapshot.exists()) {
                                 User user = dataSnapshot.getValue(User.class);
 
                                 if (login_password.equals(user.getPassword())) {
@@ -101,22 +86,16 @@ public class LoginActivity extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext(), "Logged in successfully!", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                 } else {
-                                    dTitle.setText("Error");
-                                    desc_txt.setText("Incorrect ID or Password");
-                                    dialog.show();
+                                    passErr_txt.setText("Incorrect ID or Password");
                                 }
-                            } catch (Exception ex) {
-                                dTitle.setText("Error");
-                                desc_txt.setText("Incorrect ID or Password");
-                                dialog.show();
+                            } else {
+                                passErr_txt.setText("Incorrect ID or Password");
                             }
                         }
 
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
-                            dTitle.setText("Error");
-                            desc_txt.setText("Failed to read value");
-                            dialog.show();
+                            System.out.println(databaseError.getMessage());
                         }
                     });
                 }
