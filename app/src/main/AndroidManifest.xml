@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.app.my.firstapplication">
+    package="com.app.my.helpcatapp">
 
     <uses-sdk
         android:minSdkVersion="4"
@@ -39,7 +39,7 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".MessageActivity"
+            android:name=".StudentMessageActivity"
             android:label="My Message"
             android:parentActivityName=".MainActivity" />
         <activity
@@ -63,7 +63,7 @@
             android:label="Change Password"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".AdminChangePasswordActivity"
+            android:name=".AdminResetPasswordApprovalActivity"
             android:label="Reset User Password"
             android:parentActivityName=".MainActivity" />
         <activity
@@ -78,11 +78,11 @@
             android:label="Forgot Password"
             android:parentActivityName=".LoginActivity" />
         <activity
-            android:name=".EnrollApprovalActivity"
+            android:name=".AdminEnrollApprovalActivity"
             android:label="Subject Enrollment Approval"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".RegisterNewStudentActivity"
+            android:name=".AdminRegisterStudentActivity"
             android:label="Register New Student"
             android:parentActivityName=".MainActivity" />
 
