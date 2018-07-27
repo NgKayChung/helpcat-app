@@ -10,8 +10,7 @@ import android.widget.*;
 
 import com.google.firebase.database.*;
 
-import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.*;
 
 public class AdminRegisterStudentActivity extends AppCompatActivity {
     private EditText studentName_textInput, nric_passport_textInput, emailAddress_textInput, phoneNumber_textInput, livingAddress_textInput;

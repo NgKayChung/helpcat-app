@@ -1,12 +1,8 @@
 package com.app.my.helpcatapp;
 
 import android.content.Context;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
+import android.view.*;
+import android.widget.*;
 
 import java.util.ArrayList;
 

@@ -1,7 +1,6 @@
 package com.app.my.helpcatapp;
 
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.content.*;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.*;

@@ -1,7 +1,6 @@
 package com.app.my.helpcatapp;
 
-import android.content.Context;
-import android.content.Intent;
+import android.content.*;
 import android.view.View;
 import android.widget.*;
 import android.content.SharedPreferences;

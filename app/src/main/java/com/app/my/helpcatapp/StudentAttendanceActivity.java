@@ -74,18 +74,16 @@ public class StudentAttendanceActivity extends AppCompatActivity {
 
                             @Override
                             public void onCancelled (DatabaseError databaseError){
-
+                                Log.d("E", databaseError.getMessage());
                             }
                         });
                     }
-                } else {
-                    Log.d("E", "Please proceed to enroll subject");
                 }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                Log.d("E", databaseError.getMessage());
             }
         });
 
@@ -178,7 +176,3 @@ public class StudentAttendanceActivity extends AppCompatActivity {
         }
     }
 }
-
-/*
-
- */

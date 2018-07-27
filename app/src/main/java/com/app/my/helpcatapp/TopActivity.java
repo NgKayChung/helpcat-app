@@ -1,11 +1,11 @@
 package com.app.my.helpcatapp;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.*;
 import android.os.Bundle;
 
+// TopActivity is an activity which will not display anything to the screen
+// it is an activity that runs every time application is opened
 public class TopActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {

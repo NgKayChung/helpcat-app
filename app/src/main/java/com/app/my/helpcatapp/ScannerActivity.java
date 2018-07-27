@@ -6,19 +6,15 @@ import android.support.constraint.Group;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.*;
 
 import com.google.firebase.database.*;
 import com.google.zxing.Result;
 
 import java.text.DateFormat;
 
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
@@ -122,14 +118,14 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
 
                                                     @Override
                                                     public void onCancelled(DatabaseError databaseError) {
-
+                                                        System.out.println(databaseError.getMessage());
                                                     }
                                                 });
                                             }
 
                                             @Override
                                             public void onCancelled(DatabaseError databaseError) {
-
+                                                System.out.println(databaseError.getMessage());
                                             }
                                         });
 
@@ -148,7 +144,7 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
 
                                     @Override
                                     public void onCancelled(DatabaseError databaseError) {
-
+                                        System.out.println(databaseError.getMessage());
                                     }
                                 });
                             }
@@ -156,7 +152,7 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
 
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
-
+                            System.out.println(databaseError.getMessage());
                         }
                     });
                 }
@@ -164,7 +160,7 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                System.out.println(databaseError.getMessage());
             }
         });
 
