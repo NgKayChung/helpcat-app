@@ -27,36 +27,41 @@ public class AdminResetPasswordApprovalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_reset_password_approval);
 
+        // initialize layout components
         approvalResetTextView = (TextView) findViewById(R.id.resetPasswordMessage_txt);
         changePasswordListView = (ListView) findViewById(R.id.resetPassList);
 
         firebase = FirebaseDatabase.getInstance();
 
+        // initialize list buttons with click listener
         resetListAdapter = new CustomResetList(this, R.layout.reset_password_list_item, resetList, new CustomClickListener() {
             @Override
-            public void onClick(int position) {
+            public void onClick(int position) { // approve button
                 String loginID = resetList.get(position).getID();
                 String newPassword = "";
 
-                if(loginID.charAt(0) == 'C') {
+                if(loginID.charAt(0) == 'C') { // if the user is a student
                     newPassword = "Helpcat" + loginID.substring(loginID.length() - 3, loginID.length());
-                } else if(loginID.charAt(0) == 'I') {
-                    //if lecturer
+                } else if(loginID.charAt(0) == 'I') { // if the user is lecturer
                     newPassword = "HelpcatL" + loginID.substring(loginID.length() - 4, loginID.length());
                 }
 
+                // set the new(default) password for the user
+                // remove reset request
                 firebase.getReference("users").child(loginID).child("password").setValue(newPassword);
                 firebase.getReference("reset_password_approval").child(loginID).removeValue();
             }
-        }, new CustomClickListener() {
+        }, new CustomClickListener() { // deny button
             @Override
             public void onClick(int position) {
+                // just remove the reset request in database
                 String loginID = resetList.get(position).getID();
                 firebase.getReference("reset_password_approval").child(loginID).removeValue();
             }
         });
         changePasswordListView.setAdapter(resetListAdapter);
 
+        // retrieve all reset password request from database
         resetPostEventListener = firebase.getReference("reset_password_approval").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

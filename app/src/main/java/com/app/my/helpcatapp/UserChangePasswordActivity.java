@@ -28,6 +28,7 @@ public class UserChangePasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_change_password);
 
+        // initialize password input text fields
         textInputOldPassword = findViewById(R.id.text_input_old_password);
         textInputNewPassword = findViewById(R.id.text_input_new_password);
         textInputRetypeNewPassword = findViewById(R.id.text_input_retype_new_password);

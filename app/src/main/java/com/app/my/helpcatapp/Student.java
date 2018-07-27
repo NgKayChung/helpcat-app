@@ -2,6 +2,10 @@ package com.app.my.helpcatapp;
 
 import java.util.ArrayList;
 
+// Student class
+//  - enrolledSubjects = list of subjects enrolled for the semester
+//  - enrolledProgramme = name of student registered programme
+//  - intake = intake month and year
 public class Student extends User {
     private ArrayList<CourseSubject> enrolledSubjects;
     private String enrolledProgramme;

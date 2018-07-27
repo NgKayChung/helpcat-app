@@ -58,15 +58,15 @@ public class StudentEnrollActivity extends AppCompatActivity {
         database_approval = firebaseDatabase.getReference("add_sub_approval");
         preferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
 
+        // initialize select subject to enroll list
         subjectList = new ArrayList<CourseSubject>();
         subjectList.add(new CourseSubject("Select", ""));
-
         spinner = (Spinner) findViewById(R.id.spinner);
         spinnerAdapter = new CustomListAdapter(subjectList, R.layout.simple_list_item, StudentEnrollActivity.this);
         spinner.setAdapter(spinnerAdapter);
 
+        // initialize list for added subject
         enrolledList = new ArrayList<CourseSubject>();
-
         subject_listView = (ListView) findViewById(R.id.sbjList);
         enrolledListAdapter = new CustomListWithButtonAdapter(enrolledList, R.layout.added_list_item, StudentEnrollActivity.this, new CustomClickListener() {
             @Override
@@ -83,6 +83,8 @@ public class StudentEnrollActivity extends AppCompatActivity {
         });
         subject_listView.setAdapter(enrolledListAdapter);
 
+        // add database listener for select subject list
+        // retrieve all subjects from database and remove the currently added subjects
         subjectsListener = database_subject.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -100,18 +102,22 @@ public class StudentEnrollActivity extends AppCompatActivity {
             }
         });
 
+        // create an enrollment object
         enrollment = new SubjectEnrollment();
         enrollment.setStudentID(preferences.getString("KEY_ID", null));
 
+        // add listener to retrieve added subjects list
         enrollmentListener = database_approval.child(preferences.getString("KEY_ID", null)).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                // if already have an enrollment for the student
                 if(dataSnapshot.exists()) {
                     enrollment = dataSnapshot.getValue(SubjectEnrollment.class);
-                } else {
+                } else { // otherwise set the enrollment create above to database
                     database_approval.child(preferences.getString("KEY_ID", null)).setValue(enrollment);
                 }
 
+                // if the enrollment status = 200, indicates admin already approved, disable all the buttons and lists
                 if(enrollment.getStatus() == 200) {
                     spinner.setEnabled(false);
                     spinner.setClickable(false);
@@ -124,19 +130,20 @@ public class StudentEnrollActivity extends AppCompatActivity {
 
                     enrolledListAdapter = new CustomListAdapter(enrolledList, R.layout.simple_list_item, StudentEnrollActivity.this);
                     subject_listView.setAdapter(enrolledListAdapter);
-                } else if(enrollment.getStatus() == 400) {
-                    //display remarks
+                } else if(enrollment.getStatus() == 400) { // if enrollment status = 400, indicates admin denied enrollment
                     enrollment.setSubmitted(false);
                     enrollment.setStatus(100);
                     enrollment.setRemarks("");
                     database_approval.child(preferences.getString("KEY_ID", null)).setValue(enrollment);
-                } else if(enrollment.numberOfSubject() >= 5) {
+                } else if(enrollment.numberOfSubject() >= 5) { // if added subjects number MORE than 5, disable select list
                     spinner.setEnabled(false);
                 }
 
+                // clear the added subject list and set with value from database
                 enrolledList.clear();
                 enrolledList.addAll(enrollment.getSubjectList());
 
+                // reset the select subjects list
                 subjectList.clear();
                 subjectList.add(new CourseSubject("Select", ""));
                 if (allsubjects != null) {
@@ -155,6 +162,7 @@ public class StudentEnrollActivity extends AppCompatActivity {
             }
         });
 
+        // initialize add subject button
         addSubject_btn = (Button) findViewById(R.id.addBtn);
         addSubject_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -172,6 +180,7 @@ public class StudentEnrollActivity extends AppCompatActivity {
             }
         });
 
+        // initialize submit button
         submit_btn = (Button) findViewById(R.id.smtBtn);
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -14,14 +14,14 @@ public class TopActivity extends Activity {
 
         SharedPreferences savedPrefs = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
 
+        // if no saved preferences - indicates not logged in, to login page
         if(savedPrefs.getString("KEY_ID", null) == null) {
-            //if no saved preferences / records
+
             Intent intent = new Intent(this, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
         }
-        else {
-            //preferences existed
+        else { // otherwise, to homepage
             Intent intent = new Intent(this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();

@@ -1,5 +1,8 @@
 package com.app.my.helpcatapp;
 
+// ResetPasswordSubmission class
+//  - ID = user's login ID
+//  - status = status for the reset approval
 public class ResetPasswordSubmission extends Object {
     private String ID;
     private int status;

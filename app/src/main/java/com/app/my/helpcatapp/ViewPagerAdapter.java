@@ -5,11 +5,12 @@ import android.support.v4.view.*;
 import android.view.*;
 import android.widget.*;
 
+// custom PagerAdapter class
+// obtained from external source
 public class ViewPagerAdapter extends PagerAdapter {
-
     private Context context;
     private LayoutInflater layoutInflater;
-    private Integer [] images = {R.drawable.slide1, R.drawable.slide2, R.drawable.slide3};
+    private Integer [] images = { R.drawable.slide1, R.drawable.slide2, R.drawable.slide3 };
 
     public ViewPagerAdapter(Context context) {
         this.context = context;

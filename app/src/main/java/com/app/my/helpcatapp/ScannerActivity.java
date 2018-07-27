@@ -101,7 +101,7 @@ public class ScannerActivity extends AppCompatActivity implements ZXingScannerVi
                                                     @Override
                                                     public void onDataChange(DataSnapshot attendedSnapshot) {
                                                         // if all students are attended to current class
-                                                        if(attendListSnapshot.getChildrenCount() == attendedSnapshot.getChildrenCount()) {
+                                                        if(attendListSnapshot.getChildrenCount() != 0 && attendListSnapshot.getChildrenCount() == attendedSnapshot.getChildrenCount()) {
                                                             failGroup.setVisibility(View.VISIBLE);
 
                                                             failMessage_txt.setText("All students are attended to the class");

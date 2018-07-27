@@ -13,8 +13,6 @@ import java.util.*;
 
 public class StudentAttendanceActivity extends AppCompatActivity {
     private ExpandableListView classListView;
-    private TextView startClassName_textView;
-    private TextView startClass_textView;
     private Button attendClass_button;
 
     private int lastExpandedPosition = -1;
@@ -38,6 +36,7 @@ public class StudentAttendanceActivity extends AppCompatActivity {
 
         preferences = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
 
+        // initialize enrolled subjects class list
         classList = new ArrayList<>();
         classListView = (ExpandableListView) findViewById(R.id.studentClass_list);
         classListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
@@ -52,17 +51,19 @@ public class StudentAttendanceActivity extends AppCompatActivity {
         classListAdapter = new CustomClassesExpandableListAdapter(this, classList);
         classListView.setAdapter(classListAdapter);
 
-        startClassName_textView = (TextView) findViewById(R.id.startClassName_txt);
-        startClass_textView = (TextView) findViewById(R.id.startClass_txt);
-
+        // retrieve student's enrolled subjects
         databaseReference.child("users").child(preferences.getString("KEY_ID", null)).child("enrolledSubjects").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot enrolledListSnapshot) {
                 if(enrolledListSnapshot.exists()) {
+                    // loop through the subjects list
                     for(DataSnapshot subjectSnapshot : enrolledListSnapshot.getChildren()) {
                         ExtendedCourseSubject enrolledSubject = subjectSnapshot.getValue(ExtendedCourseSubject.class);
+
+                        // get subject ID
                         String subjectCode = enrolledSubject.getSubjectCode();
 
+                        // add subject object to the list
                         databaseReference.child("subjects").orderByChild("subjectCode").equalTo(subjectCode).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot subjectSnapshot) {
@@ -88,6 +89,7 @@ public class StudentAttendanceActivity extends AppCompatActivity {
             }
         });
 
+        // initialize attend class button - generate QR code
         attendClass_button = (Button)findViewById(R.id.attendClass_btn);
         attendClass_button.setOnClickListener(new View.OnClickListener() {
             @Override

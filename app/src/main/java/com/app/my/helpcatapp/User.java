@@ -2,6 +2,17 @@ package com.app.my.helpcatapp;
 
 import com.google.firebase.database.PropertyName;
 
+// User class
+//  - ID = ID/login ID for the user
+//  - emailAddress
+//  - fullname
+//  - password = login password
+//  - nric_passport_no
+//  - nationality
+//  - gender
+//  - phoneNumber
+//  - livingAddress
+//  - userType = to store user's login type (Student / Lecturer / Admin)
 public class User extends Object {
     private String ID;
     private String emailAddress;

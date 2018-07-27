@@ -43,13 +43,14 @@ public class StudentMessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_message);
 
+        // initialize layout components
         messageTextView = (TextView) findViewById(R.id.message_txt);
         messageRecyclerView = (RecyclerView) findViewById(R.id.message_recyclerView);
         messageRecyclerView.setHasFixedSize(true);
-
         LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
         messageRecyclerView.setLayoutManager(llm);
 
+        // set adapter to the message list
         recyclerViewAdapter = new CustomRecyclerViewAdapter(messageList);
         messageRecyclerView.setAdapter(recyclerViewAdapter);
 
@@ -58,12 +59,14 @@ public class StudentMessageActivity extends AppCompatActivity {
 
         preferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
 
+        // retrieve student's enrolled subjects from database
         databaseReference.child("users").child(preferences.getString("KEY_ID", null)).child("enrolledSubjects").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot subjectSnapshot) {
                 if(subjectSnapshot.exists()) {
                     enrolledSubjectList = subjectSnapshot.getValue(subjectListGenericTypeIndicator);
 
+                    // retrieve messages list from database
                     messageEventListener = databaseReference.child("messages").addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot messageListSnapshot) {
@@ -71,27 +74,33 @@ public class StudentMessageActivity extends AppCompatActivity {
                             messageRecyclerView.setVisibility(View.GONE);
                             messageList.clear();
 
+                            // loop through all messages retrieved
                             for(DataSnapshot messageSnapshot : messageListSnapshot.getChildren()) {
                                 Message currentMessage = messageSnapshot.getValue(Message.class);
 
+                                // loop through student's enrolled subjects list
+                                // to add message to the list for the subjects that student enrolled
                                 for(Iterator<CourseSubject> subjectIt = enrolledSubjectList.iterator(); subjectIt.hasNext(); ) {
                                     CourseSubject currentSubject = subjectIt.next();
 
+                                    // if the subject same as the subject for the message
                                     if(currentMessage.getSubject().equals(currentSubject)) {
                                         messageList.add(0, currentMessage);
                                         break;
                                     }
                                 }
 
+                                // to display only 10 latest messages
                                 if(messageList.size() >= 10) {
                                     break;
                                 }
                             }
                             recyclerViewAdapter.notifyDataSetChanged();
 
+                            // if message is available, display message list
                             if(messageList.size() >= 1) {
                                 messageRecyclerView.setVisibility(View.VISIBLE);
-                            } else {
+                            } else { // display no message
                                 messageTextView.setVisibility(View.VISIBLE);
                             }
                         }
@@ -101,7 +110,7 @@ public class StudentMessageActivity extends AppCompatActivity {
 
                         }
                     });
-                } else {
+                } else { // if no enrolled subjects
                     messageTextView.setText("Please enroll subject to view message");
                     messageTextView.setVisibility(View.VISIBLE);
                 }

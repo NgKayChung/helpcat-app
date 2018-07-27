@@ -2,6 +2,12 @@ package com.app.my.helpcatapp;
 
 import java.util.ArrayList;
 
+// SubjectEnrollment class
+//  - studentID = ID of the student
+//  - subjectList = list of the subjects in enrollment
+//  - submitted = indication for enrollment submitted
+//  - status = status for the enrollment, success/failure
+//  - remarks = message for the enrollment
 public class SubjectEnrollment extends Object {
     private String studentID;
     private ArrayList<CourseSubject> subjectList;

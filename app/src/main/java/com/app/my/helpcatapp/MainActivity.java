@@ -44,8 +44,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // initialize toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
+        // initialize function buttons
         button1_img = (ImageView) findViewById(R.id.button1_img);
         button1_txt = (TextView) findViewById(R.id.button1_text);
         button2_img = (ImageView) findViewById(R.id.button2_img);
@@ -54,9 +56,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         button3_txt = (TextView) findViewById(R.id.button3_text);
 
         pref = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
-        final String userType = pref.getString("KEY_TYPE", "student");
+        final String userType = pref.getString("KEY_TYPE", null);
 
-        if(userType.equals("student")) {
+        // determine buttons to display
+        if(userType.equals("student")) { // if user is a student
             button1_img.setImageResource(R.drawable.ic_school_black_24dp);
             button1_img.setBackground(getDrawable(R.drawable.buttonbackground));
             button1_txt.setText("SUBJECT ENROLL");
@@ -90,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             });
 
+            // initialize mailbox button
             fab = (FloatingActionButton) findViewById(R.id.fab);
             fab.setVisibility(View.VISIBLE);
             fab.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     startActivity(new Intent(MainActivity.this, StudentMessageActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 }
             });
-        } else if(userType.equals("lecturer")) {
+        } else if(userType.equals("lecturer")) { // if user is lecturer
             button1_img.setImageResource(R.drawable.ic_school_black_24dp);
             button1_img.setBackground(getDrawable(R.drawable.buttonbackground));
             button1_txt.setText("CLASSES");
@@ -131,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     startActivity(new Intent(MainActivity.this, UserChangePasswordActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 }
             });
-        } else {
+        } else { // otherwise, admin
             button1_img.setImageResource(R.drawable.ic_event_available_black_24dp);
             button1_img.setBackground(getDrawable(R.drawable.buttonbackground));
             button1_txt.setText("SUBJECT APPROVAL");
@@ -166,11 +170,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             });
         }
 
+        // initialize image slider
+        // set slider dots at the bottom part of the slider
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         sliderDotspanel = (LinearLayout) findViewById(R.id.sliderDots);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);
         viewPager.setAdapter(viewPagerAdapter);
-
         dotscount = viewPagerAdapter.getCount();
         dots = new ImageView[dotscount];
 
@@ -220,6 +225,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         View sidebar_view = navigationView.getHeaderView(0);
 
+        // set user's info at sidebar
         final TextView name_textView = (TextView) sidebar_view.findViewById(R.id.name_textView);
         name_textView.setText(pref.getString("KEY_NAME", "Name") + " (" + pref.getString("KEY_ID", "ID") + ")");
 

@@ -1,5 +1,10 @@
 package com.app.my.helpcatapp;
 
+// SubjectClass class
+//  - day = week day name for the class
+//  - startTime = start time for the class
+//  - endTime = end time for the class
+//  - venue = venue for the class
 public class SubjectClass extends Object {
     private String day;
     private String startTime;
